@@ -9,7 +9,7 @@ import java.util.List;
  * (UserinfoOnly)表数据库访问层
  *
  * @author makejava
- * @since 2022-10-17 18:48:35
+ * @since 2022-10-17 19:55:59
  */
 public interface UserinfoOnlyDao {
 

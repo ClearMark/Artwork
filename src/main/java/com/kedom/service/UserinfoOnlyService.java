@@ -8,7 +8,7 @@ import org.springframework.data.domain.PageRequest;
  * (UserinfoOnly)表服务接口
  *
  * @author makejava
- * @since 2022-10-17 18:48:36
+ * @since 2022-10-17 19:56:05
  */
 public interface UserinfoOnlyService {
 

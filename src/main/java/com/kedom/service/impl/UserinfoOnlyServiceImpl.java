@@ -14,7 +14,7 @@ import javax.annotation.Resource;
  * (UserinfoOnly)表服务实现类
  *
  * @author makejava
- * @since 2022-10-17 18:48:37
+ * @since 2022-10-17 19:56:06
  */
 @Service("userinfoOnlyService")
 public class UserinfoOnlyServiceImpl implements UserinfoOnlyService {

@@ -28,8 +28,8 @@ public class MyExceptionResolver implements HandlerExceptionResolver {
         String exceptionClassName= stackTraceElement.getClassName();
         String exceptionMethodName= stackTraceElement.getMethodName();
         String exceptionMessage = e.getMessage();
-        ExceptionLog exceptionLog=new ExceptionLog(exceptionURL,exceptionClassName,exceptionMethodName,exceptionMessage);
-        exceptionLogDao.insert(exceptionLog);
+//        ExceptionLog exceptionLog=new ExceptionLog(exceptionURL,exceptionClassName,exceptionMethodName,exceptionMessage);
+//        exceptionLogDao.insert(exceptionLog);
         System.out.println("全局异常捕获");
 
         R response = new R();

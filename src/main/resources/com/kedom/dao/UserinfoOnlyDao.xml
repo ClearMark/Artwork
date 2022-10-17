@@ -8,14 +8,14 @@
         <result property="phone" column="phone" jdbcType="VARCHAR"/>
         <result property="email" column="email" jdbcType="VARCHAR"/>
         <result property="idCard" column="Id_card" jdbcType="VARCHAR"/>
-        <result property="state" column="state" jdbcType="VARCHAR"/>
         <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="userState" column="user_state" jdbcType="INTEGER"/>
     </resultMap>
 
     <!--查询单个-->
     <select id="queryById" resultMap="UserinfoOnlyMap">
         select
-          username, password, phone, email, Id_card, state, id
+          username, password, phone, email, Id_card, id, user_state
         from userinfo_only
         where id = #{id}
     </select>
@@ -23,7 +23,7 @@
     <!--查询指定行数据-->
     <select id="queryAllByLimit" resultMap="UserinfoOnlyMap">
         select
-          username, password, phone, email, Id_card, state, id
+          username, password, phone, email, Id_card, id, user_state
         from userinfo_only
         <where>
             <if test="username != null and username != ''">
@@ -41,11 +41,11 @@
             <if test="idCard != null and idCard != ''">
                 and Id_card = #{idCard}
             </if>
-            <if test="state != null and state != ''">
-                and state = #{state}
-            </if>
             <if test="id != null">
                 and id = #{id}
+            </if>
+            <if test="userState != null">
+                and user_state = #{userState}
             </if>
         </where>
         limit #{pageable.offset}, #{pageable.pageSize}
@@ -71,34 +71,34 @@
             <if test="idCard != null and idCard != ''">
                 and Id_card = #{idCard}
             </if>
-            <if test="state != null and state != ''">
-                and state = #{state}
-            </if>
             <if test="id != null">
                 and id = #{id}
+            </if>
+            <if test="userState != null">
+                and user_state = #{userState}
             </if>
         </where>
     </select>
 
     <!--新增所有列-->
     <insert id="insert" keyProperty="id" useGeneratedKeys="true">
-        insert into userinfo_only(username, password, phone, email, Id_card, state)
-        values (#{username}, #{password}, #{phone}, #{email}, #{idCard}, #{state})
+        insert into userinfo_only(username, password, phone, email, Id_card, user_state)
+        values (#{username}, #{password}, #{phone}, #{email}, #{idCard}, #{userState})
     </insert>
 
     <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true">
-        insert into userinfo_only(username, password, phone, email, Id_card, state)
+        insert into userinfo_only(username, password, phone, email, Id_card, user_state)
         values
         <foreach collection="entities" item="entity" separator=",">
-        (#{entity.username}, #{entity.password}, #{entity.phone}, #{entity.email}, #{entity.idCard}, #{entity.state})
+        (#{entity.username}, #{entity.password}, #{entity.phone}, #{entity.email}, #{entity.idCard}, #{entity.userState})
         </foreach>
     </insert>
 
     <insert id="insertOrUpdateBatch" keyProperty="id" useGeneratedKeys="true">
-        insert into userinfo_only(username, password, phone, email, Id_card, state)
+        insert into userinfo_only(username, password, phone, email, Id_card, user_state)
         values
         <foreach collection="entities" item="entity" separator=",">
-            (#{entity.username}, #{entity.password}, #{entity.phone}, #{entity.email}, #{entity.idCard}, #{entity.state})
+            (#{entity.username}, #{entity.password}, #{entity.phone}, #{entity.email}, #{entity.idCard}, #{entity.userState})
         </foreach>
         on duplicate key update
         username = values(username),
@@ -106,7 +106,7 @@
         phone = values(phone),
         email = values(email),
         Id_card = values(Id_card),
-        state = values(state)
+        user_state = values(user_state)
     </insert>
 
     <!--通过主键修改数据-->
@@ -128,8 +128,8 @@
             <if test="idCard != null and idCard != ''">
                 Id_card = #{idCard},
             </if>
-            <if test="state != null and state != ''">
-                state = #{state},
+            <if test="userState != null">
+                user_state = #{userState},
             </if>
         </set>
         where id = #{id}

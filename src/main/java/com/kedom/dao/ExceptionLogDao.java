@@ -1,6 +1,7 @@
 package com.kedom.dao;
 
 import com.kedom.entity.ExceptionLog;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.data.domain.Pageable;
 import java.util.List;
@@ -11,6 +12,7 @@ import java.util.List;
  * @author makejava
  * @since 2022-10-17 18:34:04
  */
+@Mapper
 public interface ExceptionLogDao {
 
     /**

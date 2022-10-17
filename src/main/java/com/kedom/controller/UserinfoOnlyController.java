@@ -13,7 +13,7 @@ import javax.annotation.Resource;
  * (UserinfoOnly)表控制层
  *
  * @author makejava
- * @since 2022-10-17 18:48:34
+ * @since 2022-10-17 19:55:58
  */
 @RestController
 @RequestMapping("userinfoOnly")
