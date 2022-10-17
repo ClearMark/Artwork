@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>登陆</title>
+</head>
+<body>
+<form method="post" action="" name="userLogin">
+    账号<input name="username" id="userName" type="text"><br/>
+    密码<input name="password" id="password" type="password"><br/>
+<input type="button" onclick="login()" value="登陆">
+<input type="button" onclick="register()" value="注册">
+</form>
+
+<form method="post" action="/user/uploadFile" enctype="multipart/form-data">
+    图片<input name="file" type="file">
+    <input type="submit" >上传</input>
+</form>
+
+
+
+</body>
+<script type="application/javascript" src="../../../webapp/js/jquery-3.6.0.min.js"></script>
+<script type="text/javascript">
+    function login() {
+
+        var request={
+                    userName: $('#userName').val(),
+                    password: $('#password').val()
+        }
+
+        $.ajax({
+            url: "/user/login",  // 发送的路径
+            type: "post",  // 发送方式
+            //contentType: "application/json;charset=UTF-8",后端想要一个一个获取就不用设置这个。
+            dataType: 'JSON',  // 反序列化
+            data:request,  // 发送的数据
+            success: function(result) {
+                if (result["code"]===2000)
+                {
+                    localStorage.setItem("token",result["data"]["token"])
+                    localStorage.setItem("userName",result["data"]["user"]["userName"])
+                    localStorage.setItem("user",JSON.stringify(result["data"]["user"]))
+
+                   window.location.href = '../../../webapp/html/index.html';
+                }
+                else
+                {
+                    alert(result["message"])
+                }
+
+            }
+        })
+    }
+    function register(){
+        window.location.href = '/register.html';
+    }
+
+    function uploadFile(){
+        var formData = new FormData();
+        formData.append("file", document.getElementById("uploadImage").files[0]);
+        console.log(formData)
+        $.ajax({
+            url: "/user/uploadFile",
+            type : 'POST',
+            cache : false,
+            data : formData,
+            dataType : 'json',
+            contentType: false,
+            processData: false,
+            async : false,
+            success: function(data) {
+                alert("成功")
+            },
+            error: function(data) {
+                alert("失败")
+            }
+        });
+    }
+</script>
+</html>

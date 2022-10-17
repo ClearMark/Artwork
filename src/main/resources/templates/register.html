@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form method="post" action="" name="registerForm">
+    账号<input  id="userName" type="text"><br/>
+    密码<input  id="password" type="text"><br/>
+<!--    姓名<input  id="name" type="text"><br/>-->
+<!--    性别：<input type="radio" name="sex" id="girlRadio">女-->
+<!--         <input type="radio" name="sex"  id="boyRadio">男-->
+<!--    手机号<input  id="phone" type="text"><br/>-->
+    <input type="button" onclick="register()" value="注册">
+</form>
+
+<!--<div class="lg-username input-item clearfix">-->
+<!--    <input type="text" placeholder="输入四位验证码" name="captcha" id="captcha"  />-->
+<!--    <img src="/user/getcode" id="createCheckCode" />-->
+<!--</div>-->
+
+</body>
+<script type="application/javascript" src="../../../webapp/js/jquery-3.6.0.min.js"></script>
+<script type="text/javascript">
+    function register() {
+        var sex=$('#girlRadio').checked?1:0;
+        var request={
+                userName: $('#userName').val(),
+                password: $('#password').val(),
+        }
+
+        $.ajax({
+            url: "/user/register",  // 发送的路径
+            type: "post",  // 发送方式
+            contentType: "application/json;charset=UTF-8",
+            dataType: 'JSON',  // 反序列化
+            data:JSON.stringify(request),  // 发送的数据
+            success: function(result) {
+                if (result["code"]==2000)
+                {
+                    alert("注册成功")
+                    window.location.href = '/userLogin.html';
+                }
+                else
+                {
+                    alert(result["message"])
+                }
+
+            }
+        })
+    }
+
+</script>
+</html>
