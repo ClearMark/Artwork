@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kedom.dao.ArtworkExamineDao">
+
+    <resultMap type="com.kedom.entity.ArtworkExamine" id="ArtworkExamineMap">
+        <result property="artworkId" column="artwork_id" jdbcType="VARCHAR"/>
+        <result property="artworkName" column="artwork_name" jdbcType="VARCHAR"/>
+        <result property="artworkReleaseDate" column="artwork_release_date" jdbcType="TIMESTAMP"/>
+        <result property="releaseCount" column="release_count" jdbcType="INTEGER"/>
+        <result property="releaseUsername" column="release_username" jdbcType="VARCHAR"/>
+        <result property="artworkOrigin" column="artwork_origin" jdbcType="VARCHAR"/>
+        <result property="artworkImgAddress" column="artwork_img_address" jdbcType="VARCHAR"/>
+        <result property="artworkLevel" column="artwork_level" jdbcType="INTEGER"/>
+        <result property="artworkCollectCode" column="artwork_collect_code" jdbcType="VARCHAR"/>
+        <result property="examineAdminId" column="examine_admin_id" jdbcType="INTEGER"/>
+        <result property="examineDate" column="examine_date" jdbcType="TIMESTAMP"/>
+        <result property="examineState" column="examine_state" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="ArtworkExamineMap">
+        select
+          artwork_id, artwork_name, artwork_release_date, release_count, release_username, artwork_origin, artwork_img_address, artwork_level, artwork_collect_code, examine_admin_id, examine_date, examine_state
+        from artwork_examine
+        where artwork_id = #{artworkId}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="ArtworkExamineMap">
+        select
+          artwork_id, artwork_name, artwork_release_date, release_count, release_username, artwork_origin, artwork_img_address, artwork_level, artwork_collect_code, examine_admin_id, examine_date, examine_state
+        from artwork_examine
+        <where>
+            <if test="artworkId != null and artworkId != ''">
+                and artwork_id = #{artworkId}
+            </if>
+            <if test="artworkName != null and artworkName != ''">
+                and artwork_name = #{artworkName}
+            </if>
+            <if test="artworkReleaseDate != null">
+                and artwork_release_date = #{artworkReleaseDate}
+            </if>
+            <if test="releaseCount != null">
+                and release_count = #{releaseCount}
+            </if>
+            <if test="releaseUsername != null and releaseUsername != ''">
+                and release_username = #{releaseUsername}
+            </if>
+            <if test="artworkOrigin != null and artworkOrigin != ''">
+                and artwork_origin = #{artworkOrigin}
+            </if>
+            <if test="artworkImgAddress != null and artworkImgAddress != ''">
+                and artwork_img_address = #{artworkImgAddress}
+            </if>
+            <if test="artworkLevel != null">
+                and artwork_level = #{artworkLevel}
+            </if>
+            <if test="artworkCollectCode != null and artworkCollectCode != ''">
+                and artwork_collect_code = #{artworkCollectCode}
+            </if>
+            <if test="examineAdminId != null">
+                and examine_admin_id = #{examineAdminId}
+            </if>
+            <if test="examineDate != null">
+                and examine_date = #{examineDate}
+            </if>
+            <if test="examineState != null">
+                and examine_state = #{examineState}
+            </if>
+        </where>
+        limit #{pageable.offset}, #{pageable.pageSize}
+    </select>
+
+    <!--统计总行数-->
+    <select id="count" resultType="java.lang.Long">
+        select count(1)
+        from artwork_examine
+        <where>
+            <if test="artworkId != null and artworkId != ''">
+                and artwork_id = #{artworkId}
+            </if>
+            <if test="artworkName != null and artworkName != ''">
+                and artwork_name = #{artworkName}
+            </if>
+            <if test="artworkReleaseDate != null">
+                and artwork_release_date = #{artworkReleaseDate}
+            </if>
+            <if test="releaseCount != null">
+                and release_count = #{releaseCount}
+            </if>
+            <if test="releaseUsername != null and releaseUsername != ''">
+                and release_username = #{releaseUsername}
+            </if>
+            <if test="artworkOrigin != null and artworkOrigin != ''">
+                and artwork_origin = #{artworkOrigin}
+            </if>
+            <if test="artworkImgAddress != null and artworkImgAddress != ''">
+                and artwork_img_address = #{artworkImgAddress}
+            </if>
+            <if test="artworkLevel != null">
+                and artwork_level = #{artworkLevel}
+            </if>
+            <if test="artworkCollectCode != null and artworkCollectCode != ''">
+                and artwork_collect_code = #{artworkCollectCode}
+            </if>
+            <if test="examineAdminId != null">
+                and examine_admin_id = #{examineAdminId}
+            </if>
+            <if test="examineDate != null">
+                and examine_date = #{examineDate}
+            </if>
+            <if test="examineState != null">
+                and examine_state = #{examineState}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="artworkId" useGeneratedKeys="true">
+        insert into artwork_examine(artwork_name, artwork_release_date, release_count, release_username, artwork_origin, artwork_img_address, artwork_level, artwork_collect_code, examine_admin_id, examine_date, examine_state)
+        values (#{artworkName}, #{artworkReleaseDate}, #{releaseCount}, #{releaseUsername}, #{artworkOrigin}, #{artworkImgAddress}, #{artworkLevel}, #{artworkCollectCode}, #{examineAdminId}, #{examineDate}, #{examineState})
+    </insert>
+
+    <insert id="insertBatch" keyProperty="artworkId" useGeneratedKeys="true">
+        insert into artwork_examine(artwork_name, artwork_release_date, release_count, release_username, artwork_origin, artwork_img_address, artwork_level, artwork_collect_code, examine_admin_id, examine_date, examine_state)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+        (#{entity.artworkName}, #{entity.artworkReleaseDate}, #{entity.releaseCount}, #{entity.releaseUsername}, #{entity.artworkOrigin}, #{entity.artworkImgAddress}, #{entity.artworkLevel}, #{entity.artworkCollectCode}, #{entity.examineAdminId}, #{entity.examineDate}, #{entity.examineState})
+        </foreach>
+    </insert>
+
+    <insert id="insertOrUpdateBatch" keyProperty="artworkId" useGeneratedKeys="true">
+        insert into artwork_examine(artwork_name, artwork_release_date, release_count, release_username, artwork_origin, artwork_img_address, artwork_level, artwork_collect_code, examine_admin_id, examine_date, examine_state)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.artworkName}, #{entity.artworkReleaseDate}, #{entity.releaseCount}, #{entity.releaseUsername}, #{entity.artworkOrigin}, #{entity.artworkImgAddress}, #{entity.artworkLevel}, #{entity.artworkCollectCode}, #{entity.examineAdminId}, #{entity.examineDate}, #{entity.examineState})
+        </foreach>
+        on duplicate key update
+        artwork_name = values(artwork_name),
+        artwork_release_date = values(artwork_release_date),
+        release_count = values(release_count),
+        release_username = values(release_username),
+        artwork_origin = values(artwork_origin),
+        artwork_img_address = values(artwork_img_address),
+        artwork_level = values(artwork_level),
+        artwork_collect_code = values(artwork_collect_code),
+        examine_admin_id = values(examine_admin_id),
+        examine_date = values(examine_date),
+        examine_state = values(examine_state)
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update artwork_examine
+        <set>
+            <if test="artworkName != null and artworkName != ''">
+                artwork_name = #{artworkName},
+            </if>
+            <if test="artworkReleaseDate != null">
+                artwork_release_date = #{artworkReleaseDate},
+            </if>
+            <if test="releaseCount != null">
+                release_count = #{releaseCount},
+            </if>
+            <if test="releaseUsername != null and releaseUsername != ''">
+                release_username = #{releaseUsername},
+            </if>
+            <if test="artworkOrigin != null and artworkOrigin != ''">
+                artwork_origin = #{artworkOrigin},
+            </if>
+            <if test="artworkImgAddress != null and artworkImgAddress != ''">
+                artwork_img_address = #{artworkImgAddress},
+            </if>
+            <if test="artworkLevel != null">
+                artwork_level = #{artworkLevel},
+            </if>
+            <if test="artworkCollectCode != null and artworkCollectCode != ''">
+                artwork_collect_code = #{artworkCollectCode},
+            </if>
+            <if test="examineAdminId != null">
+                examine_admin_id = #{examineAdminId},
+            </if>
+            <if test="examineDate != null">
+                examine_date = #{examineDate},
+            </if>
+            <if test="examineState != null">
+                examine_state = #{examineState},
+            </if>
+        </set>
+        where artwork_id = #{artworkId}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from artwork_examine where artwork_id = #{artworkId}
+    </delete>
+
+</mapper>
+
