@@ -1,45 +1,41 @@
 package com.kedom.entity;
 
-import java.time.LocalDateTime;
+import java.util.Date;
 import java.io.Serializable;
 
 /**
  * (ExceptionLog)实体类
  *
  * @author makejava
- * @since 2022-09-05 15:49:58
+ * @since 2022-10-17 18:34:04
  */
 public class ExceptionLog implements Serializable {
-    private static final long serialVersionUID = 303137722615585331L;
-    
-    private Integer exceptionId;
-    
+    private static final long serialVersionUID = 461330697970933666L;
+    /**
+     * 异常接口
+     */
     private String exceptionUrl;
-    
+    /**
+     * 异常类
+     */
     private String exceptionClassName;
-    
+    /**
+     * 异常方法
+     */
     private String exceptionMethodName;
-    
+    /**
+     * 异常消息
+     */
     private String exceptionMessage;
-    
-    private LocalDateTime exceptionTime;
+    /**
+     * 异常时间
+     */
+    private Date exceptionTime;
+    /**
+     * 主键 无作用
+     */
+    private Integer id;
 
-    public ExceptionLog(String exceptionURL, String exceptionClassName, String exceptionMethodName, String exceptionMessage) {
-        this.exceptionUrl=exceptionURL;
-        this.exceptionClassName=exceptionClassName;
-        this.exceptionMethodName=exceptionMethodName;
-        this.exceptionMessage=exceptionMessage;
-        this.exceptionTime=LocalDateTime.now();
-    }
-
-
-    public Integer getExceptionId() {
-        return exceptionId;
-    }
-
-    public void setExceptionId(Integer exceptionId) {
-        this.exceptionId = exceptionId;
-    }
 
     public String getExceptionUrl() {
         return exceptionUrl;
@@ -73,12 +69,20 @@ public class ExceptionLog implements Serializable {
         this.exceptionMessage = exceptionMessage;
     }
 
-    public LocalDateTime getExceptionTime() {
+    public Date getExceptionTime() {
         return exceptionTime;
     }
 
-    public void setExceptionTime(LocalDateTime exceptionTime) {
+    public void setExceptionTime(Date exceptionTime) {
         this.exceptionTime = exceptionTime;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
 }

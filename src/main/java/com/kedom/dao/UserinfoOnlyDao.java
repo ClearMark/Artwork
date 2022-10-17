@@ -1,34 +1,31 @@
 package com.kedom.dao;
 
 import com.kedom.entity.UserinfoOnly;
-import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.data.domain.Pageable;
-
 import java.util.List;
 
 /**
  * (UserinfoOnly)表数据库访问层
  *
  * @author makejava
- * @since 2022-07-13 22:26:20
+ * @since 2022-10-17 18:48:35
  */
-@Mapper
 public interface UserinfoOnlyDao {
 
     /**
      * 通过ID查询单条数据
      *
-     * @param uid 主键
+     * @param id 主键
      * @return 实例对象
      */
-    UserinfoOnly queryById(Integer uid);
+    UserinfoOnly queryById(Integer id);
 
     /**
      * 查询指定行数据
      *
      * @param userinfoOnly 查询条件
-     * @param pageable     分页对象
+     * @param pageable         分页对象
      * @return 对象列表
      */
     List<UserinfoOnly> queryAllByLimit(UserinfoOnly userinfoOnly, @Param("pageable") Pageable pageable);
@@ -77,10 +74,10 @@ public interface UserinfoOnlyDao {
     /**
      * 通过主键删除数据
      *
-     * @param uid 主键
+     * @param id 主键
      * @return 影响行数
      */
-    int deleteById(Integer uid);
+    int deleteById(Integer id);
 
 }
 

@@ -14,7 +14,7 @@ import javax.annotation.Resource;
  * (ExceptionLog)表服务实现类
  *
  * @author makejava
- * @since 2022-09-05 16:17:48
+ * @since 2022-10-17 18:34:06
  */
 @Service("exceptionLogService")
 public class ExceptionLogServiceImpl implements ExceptionLogService {
@@ -24,12 +24,12 @@ public class ExceptionLogServiceImpl implements ExceptionLogService {
     /**
      * 通过ID查询单条数据
      *
-     * @param exceptionId 主键
+     * @param id 主键
      * @return 实例对象
      */
     @Override
-    public ExceptionLog queryById(Integer exceptionId) {
-        return this.exceptionLogDao.queryById(exceptionId);
+    public ExceptionLog queryById(Integer id) {
+        return this.exceptionLogDao.queryById(id);
     }
 
     /**
@@ -66,17 +66,17 @@ public class ExceptionLogServiceImpl implements ExceptionLogService {
     @Override
     public ExceptionLog update(ExceptionLog exceptionLog) {
         this.exceptionLogDao.update(exceptionLog);
-        return this.queryById(exceptionLog.getExceptionId());
+        return this.queryById(exceptionLog.getId());
     }
 
     /**
      * 通过主键删除数据
      *
-     * @param exceptionId 主键
+     * @param id 主键
      * @return 是否成功
      */
     @Override
-    public boolean deleteById(Integer exceptionId) {
-        return this.exceptionLogDao.deleteById(exceptionId) > 0;
+    public boolean deleteById(Integer id) {
+        return this.exceptionLogDao.deleteById(id) > 0;
     }
 }

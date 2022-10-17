@@ -6,14 +6,10 @@ import java.io.Serializable;
  * (UserinfoOnly)实体类
  *
  * @author makejava
- * @since 2022-07-13 22:26:22
+ * @since 2022-10-17 18:48:36
  */
 public class UserinfoOnly implements Serializable {
-    private static final long serialVersionUID = 936548124541895590L;
-    /**
-     * 主键id
-     */
-    private Integer uid;
+    private static final long serialVersionUID = -87021198840517851L;
     /**
      * 用户名
      */
@@ -38,15 +34,11 @@ public class UserinfoOnly implements Serializable {
      * 账号状态
      */
     private String state;
+    /**
+     * 主键id 无业务作用
+     */
+    private Integer id;
 
-
-    public Integer getUid() {
-        return uid;
-    }
-
-    public void setUid(Integer uid) {
-        this.uid = uid;
-    }
 
     public String getUsername() {
         return username;
@@ -94,6 +86,14 @@ public class UserinfoOnly implements Serializable {
 
     public void setState(String state) {
         this.state = state;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
 }

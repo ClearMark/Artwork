@@ -13,7 +13,7 @@ import javax.annotation.Resource;
  * (ExceptionLog)表控制层
  *
  * @author makejava
- * @since 2022-09-05 15:49:58
+ * @since 2022-10-17 18:34:03
  */
 @RestController
 @RequestMapping("exceptionLog")

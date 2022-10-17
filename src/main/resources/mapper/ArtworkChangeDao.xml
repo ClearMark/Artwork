@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kedom.dao.ArtworkChangeDao">
+
+    <resultMap type="com.kedom.entity.ArtworkChange" id="ArtworkChangeMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="artworkId" column="artwork_id" jdbcType="VARCHAR"/>
+        <result property="username" column="username" jdbcType="VARCHAR"/>
+        <result property="artworkCountChange" column="artwork_count_change" jdbcType="INTEGER"/>
+        <result property="changeDate" column="change_date" jdbcType="TIMESTAMP"/>
+        <result property="changeMode" column="change_mode" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="ArtworkChangeMap">
+        select
+          id, artwork_id, username, artwork_count_change, change_date, change_mode
+        from artwork_change
+        where id = #{id}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="ArtworkChangeMap">
+        select
+          id, artwork_id, username, artwork_count_change, change_date, change_mode
+        from artwork_change
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="artworkId != null and artworkId != ''">
+                and artwork_id = #{artworkId}
+            </if>
+            <if test="username != null and username != ''">
+                and username = #{username}
+            </if>
+            <if test="artworkCountChange != null">
+                and artwork_count_change = #{artworkCountChange}
+            </if>
+            <if test="changeDate != null">
+                and change_date = #{changeDate}
+            </if>
+            <if test="changeMode != null">
+                and change_mode = #{changeMode}
+            </if>
+        </where>
+        limit #{pageable.offset}, #{pageable.pageSize}
+    </select>
+
+    <!--统计总行数-->
+    <select id="count" resultType="java.lang.Long">
+        select count(1)
+        from artwork_change
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="artworkId != null and artworkId != ''">
+                and artwork_id = #{artworkId}
+            </if>
+            <if test="username != null and username != ''">
+                and username = #{username}
+            </if>
+            <if test="artworkCountChange != null">
+                and artwork_count_change = #{artworkCountChange}
+            </if>
+            <if test="changeDate != null">
+                and change_date = #{changeDate}
+            </if>
+            <if test="changeMode != null">
+                and change_mode = #{changeMode}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into artwork_change(artwork_id, username, artwork_count_change, change_date, change_mode)
+        values (#{artworkId}, #{username}, #{artworkCountChange}, #{changeDate}, #{changeMode})
+    </insert>
+
+    <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into artwork_change(artwork_id, username, artwork_count_change, change_date, change_mode)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+        (#{entity.artworkId}, #{entity.username}, #{entity.artworkCountChange}, #{entity.changeDate}, #{entity.changeMode})
+        </foreach>
+    </insert>
+
+    <insert id="insertOrUpdateBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into artwork_change(artwork_id, username, artwork_count_change, change_date, change_mode)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.artworkId}, #{entity.username}, #{entity.artworkCountChange}, #{entity.changeDate}, #{entity.changeMode})
+        </foreach>
+        on duplicate key update
+        artwork_id = values(artwork_id),
+        username = values(username),
+        artwork_count_change = values(artwork_count_change),
+        change_date = values(change_date),
+        change_mode = values(change_mode)
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update artwork_change
+        <set>
+            <if test="artworkId != null and artworkId != ''">
+                artwork_id = #{artworkId},
+            </if>
+            <if test="username != null and username != ''">
+                username = #{username},
+            </if>
+            <if test="artworkCountChange != null">
+                artwork_count_change = #{artworkCountChange},
+            </if>
+            <if test="changeDate != null">
+                change_date = #{changeDate},
+            </if>
+            <if test="changeMode != null">
+                change_mode = #{changeMode},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from artwork_change where id = #{id}
+    </delete>
+
+</mapper>
+

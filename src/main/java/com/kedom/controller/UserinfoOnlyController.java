@@ -13,7 +13,7 @@ import javax.annotation.Resource;
  * (UserinfoOnly)表控制层
  *
  * @author makejava
- * @since 2022-07-13 22:26:10
+ * @since 2022-10-17 18:48:34
  */
 @RestController
 @RequestMapping("userinfoOnly")
@@ -28,7 +28,7 @@ public class UserinfoOnlyController {
      * 分页查询
      *
      * @param userinfoOnly 筛选条件
-     * @param pageRequest  分页对象
+     * @param pageRequest      分页对象
      * @return 查询结果
      */
     @GetMapping

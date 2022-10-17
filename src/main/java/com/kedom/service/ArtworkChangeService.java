@@ -1,16 +1,16 @@
 package com.kedom.service;
 
-import com.kedom.entity.ExceptionLog;
+import com.kedom.entity.ArtworkChange;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 
 /**
- * (ExceptionLog)表服务接口
+ * 艺术品的获取去出售记录(ArtworkChange)表服务接口
  *
  * @author makejava
- * @since 2022-10-17 18:34:05
+ * @since 2022-10-17 18:54:07
  */
-public interface ExceptionLogService {
+public interface ArtworkChangeService {
 
     /**
      * 通过ID查询单条数据
@@ -18,32 +18,32 @@ public interface ExceptionLogService {
      * @param id 主键
      * @return 实例对象
      */
-    ExceptionLog queryById(Integer id);
+    ArtworkChange queryById(Integer id);
 
     /**
      * 分页查询
      *
-     * @param exceptionLog 筛选条件
+     * @param artworkChange 筛选条件
      * @param pageRequest      分页对象
      * @return 查询结果
      */
-    Page<ExceptionLog> queryByPage(ExceptionLog exceptionLog, PageRequest pageRequest);
+    Page<ArtworkChange> queryByPage(ArtworkChange artworkChange, PageRequest pageRequest);
 
     /**
      * 新增数据
      *
-     * @param exceptionLog 实例对象
+     * @param artworkChange 实例对象
      * @return 实例对象
      */
-    ExceptionLog insert(ExceptionLog exceptionLog);
+    ArtworkChange insert(ArtworkChange artworkChange);
 
     /**
      * 修改数据
      *
-     * @param exceptionLog 实例对象
+     * @param artworkChange 实例对象
      * @return 实例对象
      */
-    ExceptionLog update(ExceptionLog exceptionLog);
+    ArtworkChange update(ArtworkChange artworkChange);
 
     /**
      * 通过主键删除数据
