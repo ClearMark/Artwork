@@ -6,6 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import redis.clients.jedis.Jedis;
 
 import javax.annotation.Resource;
 
@@ -16,7 +17,7 @@ import javax.annotation.Resource;
  * @since 2022-10-17 18:33:25
  */
 @RestController
-@RequestMapping("artworkCollect")
+@RequestMapping("/artworkCollect")
 public class ArtworkCollectController {
     /**
      * 服务对象
@@ -33,6 +34,7 @@ public class ArtworkCollectController {
      */
     @GetMapping
     public ResponseEntity<Page<ArtworkCollect>> queryByPage(ArtworkCollect artworkCollect, PageRequest pageRequest) {
+        System.out.println("aaaaa");
         return ResponseEntity.ok(this.artworkCollectService.queryByPage(artworkCollect, pageRequest));
     }
 
@@ -42,7 +44,7 @@ public class ArtworkCollectController {
      * @param id 主键
      * @return 单条数据
      */
-    @GetMapping("{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<ArtworkCollect> queryById(@PathVariable("id") Integer id) {
         return ResponseEntity.ok(this.artworkCollectService.queryById(id));
     }
@@ -53,8 +55,9 @@ public class ArtworkCollectController {
      * @param artworkCollect 实体
      * @return 新增结果
      */
+
     @PostMapping
-    public ResponseEntity<ArtworkCollect> add(ArtworkCollect artworkCollect) {
+    public ResponseEntity<ArtworkCollect> register(ArtworkCollect artworkCollect) {
         return ResponseEntity.ok(this.artworkCollectService.insert(artworkCollect));
     }
 
@@ -66,6 +69,7 @@ public class ArtworkCollectController {
      */
     @PutMapping
     public ResponseEntity<ArtworkCollect> edit(ArtworkCollect artworkCollect) {
+        System.out.println("a");
         return ResponseEntity.ok(this.artworkCollectService.update(artworkCollect));
     }
 
@@ -77,7 +81,9 @@ public class ArtworkCollectController {
      */
     @DeleteMapping
     public ResponseEntity<Boolean> deleteById(Integer id) {
+        Jedis jedis = new Jedis();
         return ResponseEntity.ok(this.artworkCollectService.deleteById(id));
+
     }
 
 }

@@ -79,6 +79,5 @@ public class ExceptionLogController {
     public ResponseEntity<Boolean> deleteById(Integer id) {
         return ResponseEntity.ok(this.exceptionLogService.deleteById(id));
     }
-
 }
 

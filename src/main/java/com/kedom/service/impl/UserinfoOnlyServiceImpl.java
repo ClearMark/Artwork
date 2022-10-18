@@ -2,6 +2,7 @@ package com.kedom.service.impl;
 
 import com.kedom.entity.UserinfoOnly;
 import com.kedom.dao.UserinfoOnlyDao;
+import com.kedom.myJavaUtils.NFTProUtils;
 import com.kedom.service.UserinfoOnlyService;
 import org.springframework.stereotype.Service;
 import org.springframework.data.domain.Page;
@@ -53,6 +54,8 @@ public class UserinfoOnlyServiceImpl implements UserinfoOnlyService {
      */
     @Override
     public UserinfoOnly insert(UserinfoOnly userinfoOnly) {
+
+        userinfoOnly.setPassword(NFTProUtils.getMd5(userinfoOnly.getPassword())); //加密
         this.userinfoOnlyDao.insert(userinfoOnly);
         return userinfoOnly;
     }

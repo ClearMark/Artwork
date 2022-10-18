@@ -24,6 +24,12 @@ public class R {
             this.setMessage(message);
             return this;
         }
+
+    public R fillCode (String message){
+        this.setMessage(message);
+        return this;
+    }
+
     public R fillData (Object data){
             this.setCode(CodeEnum.SUCCESS.getCode());
             this.setMessage(CodeEnum.SUCCESS.getMessage());

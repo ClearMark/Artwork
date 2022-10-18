@@ -1,6 +1,8 @@
 package com.kedom.controller;
 
+import com.google.common.base.Preconditions;
 import com.kedom.entity.UserinfoOnly;
+import com.kedom.myJavaUtils.ParameterValidation;
 import com.kedom.service.UserinfoOnlyService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -16,7 +18,7 @@ import javax.annotation.Resource;
  * @since 2022-10-17 19:55:58
  */
 @RestController
-@RequestMapping("userinfoOnly")
+@RequestMapping("/userinfoOnly")
 public class UserinfoOnlyController {
     /**
      * 服务对象
@@ -42,9 +44,9 @@ public class UserinfoOnlyController {
      * @param id 主键
      * @return 单条数据
      */
-    @GetMapping("{id}")
-    public ResponseEntity<UserinfoOnly> queryById(@PathVariable("id") Integer id) {
-        return ResponseEntity.ok(this.userinfoOnlyService.queryById(id));
+    @GetMapping("/{id}")
+    public ResponseEntity<String> queryById(@PathVariable("id") Integer id) {
+        return ResponseEntity.ok("this.userinfoOnlyService.queryById(id)");
     }
 
     /**
@@ -55,6 +57,9 @@ public class UserinfoOnlyController {
      */
     @PostMapping
     public ResponseEntity<UserinfoOnly> add(UserinfoOnly userinfoOnly) {
+        ParameterValidation.checkNotNull(userinfoOnly);
+        ParameterValidation.checkNotEmpty(userinfoOnly.getUsername());
+        ParameterValidation.checkNotEmpty(userinfoOnly.getPassword());
         return ResponseEntity.ok(this.userinfoOnlyService.insert(userinfoOnly));
     }
 

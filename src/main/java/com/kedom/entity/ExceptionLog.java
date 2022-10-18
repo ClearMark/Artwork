@@ -1,5 +1,6 @@
 package com.kedom.entity;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.io.Serializable;
 
@@ -30,11 +31,19 @@ public class ExceptionLog implements Serializable {
     /**
      * 异常时间
      */
-    private Date exceptionTime;
+    private LocalDateTime exceptionTime;
     /**
      * 主键 无作用
      */
     private Integer id;
+
+    public ExceptionLog(String exceptionUrl, String exceptionClassName, String exceptionMethodName, String exceptionMessage, LocalDateTime exceptionTime) {
+        this.exceptionUrl = exceptionUrl;
+        this.exceptionClassName = exceptionClassName;
+        this.exceptionMethodName = exceptionMethodName;
+        this.exceptionMessage = exceptionMessage;
+        this.exceptionTime = exceptionTime;
+    }
 
 
     public String getExceptionUrl() {
@@ -69,11 +78,11 @@ public class ExceptionLog implements Serializable {
         this.exceptionMessage = exceptionMessage;
     }
 
-    public Date getExceptionTime() {
+    public LocalDateTime getExceptionTime() {
         return exceptionTime;
     }
 
-    public void setExceptionTime(Date exceptionTime) {
+    public void setExceptionTime(LocalDateTime exceptionTime) {
         this.exceptionTime = exceptionTime;
     }
 
