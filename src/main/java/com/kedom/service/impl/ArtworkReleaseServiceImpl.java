@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
+import java.util.List;
+import java.util.ArrayList;
 
 import javax.annotation.Resource;
 
@@ -14,7 +16,7 @@ import javax.annotation.Resource;
  * 艺术品发布表(ArtworkRelease)表服务实现类
  *
  * @author makejava
- * @since 2022-10-18 17:46:01
+ * @since 2022-10-18 23:12:54
  */
 @Service("artworkReleaseService")
 public class ArtworkReleaseServiceImpl implements ArtworkReleaseService {
@@ -29,7 +31,8 @@ public class ArtworkReleaseServiceImpl implements ArtworkReleaseService {
      */
     @Override
     public ArtworkRelease queryById(String artworkReleaseId) {
-        return this.artworkReleaseDao.queryById(artworkReleaseId);
+       this.artworkReleaseDao.queryById(artworkReleaseId);
+     return null;
     }
 
     /**
@@ -40,9 +43,9 @@ public class ArtworkReleaseServiceImpl implements ArtworkReleaseService {
      * @return 查询结果
      */
     @Override
-    public Page<ArtworkRelease> queryByPage(ArtworkRelease artworkRelease, PageRequest pageRequest) {
+    public List<ArtworkRelease> queryByPage(ArtworkRelease artworkRelease, PageRequest pageRequest) {
         long total = this.artworkReleaseDao.count(artworkRelease);
-        return new PageImpl<>(this.artworkReleaseDao.queryAllByLimit(artworkRelease, pageRequest), pageRequest, total);
+     return null;
     }
 
     /**
@@ -52,9 +55,9 @@ public class ArtworkReleaseServiceImpl implements ArtworkReleaseService {
      * @return 实例对象
      */
     @Override
-    public ArtworkRelease insert(ArtworkRelease artworkRelease) {
+    public Integer insert(ArtworkRelease artworkRelease) {
         this.artworkReleaseDao.insert(artworkRelease);
-        return artworkRelease;
+     return null;
     }
 
     /**
@@ -64,9 +67,9 @@ public class ArtworkReleaseServiceImpl implements ArtworkReleaseService {
      * @return 实例对象
      */
     @Override
-    public ArtworkRelease update(ArtworkRelease artworkRelease) {
+    public Integer update(ArtworkRelease artworkRelease) {
         this.artworkReleaseDao.update(artworkRelease);
-        return this.queryById(artworkRelease.getArtworkReleaseId());
+     return null;
     }
 
     /**
@@ -76,7 +79,8 @@ public class ArtworkReleaseServiceImpl implements ArtworkReleaseService {
      * @return 是否成功
      */
     @Override
-    public boolean deleteById(String artworkReleaseId) {
-        return this.artworkReleaseDao.deleteById(artworkReleaseId) > 0;
+    public Integer deleteById(String artworkReleaseId) {
+         this.artworkReleaseDao.deleteById(artworkReleaseId);
+     return null;
     }
 }

@@ -81,26 +81,27 @@
     </select>
 
     <!--新增所有列-->
-    <insert id="insert" keyProperty="userId" useGeneratedKeys="true">
-        insert into user(username, password, phone, email, Id_card, user_state)
-        values (#{username}, #{password}, #{phone}, #{email}, #{idCard}, #{userState})
+    <insert id="insert" >
+        insert into user(user_id, username, password, phone, email, Id_card, user_state)
+        values (#{userId}, #{username}, #{password}, #{phone}, #{email}, #{idCard}, #{userState})
     </insert>
 
-    <insert id="insertBatch" keyProperty="userId" useGeneratedKeys="true">
-        insert into user(username, password, phone, email, Id_card, user_state)
+    <insert id="insertBatch">
+        insert into user(user_id, username, password, phone, email, Id_card, user_state)
         values
         <foreach collection="entities" item="entity" separator=",">
-        (#{entity.username}, #{entity.password}, #{entity.phone}, #{entity.email}, #{entity.idCard}, #{entity.userState})
+        (#{entity.userId}, #{entity.username}, #{entity.password}, #{entity.phone}, #{entity.email}, #{entity.idCard}, #{entity.userState})
         </foreach>
     </insert>
 
-    <insert id="insertOrUpdateBatch" keyProperty="userId" useGeneratedKeys="true">
+    <insert id="insertOrUpdateBatch">
         insert into user(username, password, phone, email, Id_card, user_state)
         values
         <foreach collection="entities" item="entity" separator=",">
-            (#{entity.username}, #{entity.password}, #{entity.phone}, #{entity.email}, #{entity.idCard}, #{entity.userState})
+            (#{entity.userId}, #{entity.username}, #{entity.password}, #{entity.phone}, #{entity.email}, #{entity.idCard}, #{entity.userState})
         </foreach>
         on duplicate key update
+        user_id = values(user_id),
         username = values(username),
         password = values(password),
         phone = values(phone),

@@ -3,6 +3,7 @@ package com.kedom.controller;
 import com.kedom.entity.ArtworkChange;
 import com.kedom.service.ArtworkChangeService;
 import org.springframework.data.domain.Page;
+import com.kedom.entity.R;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,7 +14,7 @@ import javax.annotation.Resource;
  * 艺术品的获取去出售记录(ArtworkChange)表控制层
  *
  * @author makejava
- * @since 2022-10-18 17:45:52
+ * @since 2022-10-18 23:12:54
  */
 @RestController
 @RequestMapping("artworkChange")
@@ -32,8 +33,9 @@ public class ArtworkChangeController {
      * @return 查询结果
      */
     @GetMapping
-    public ResponseEntity<Page<ArtworkChange>> queryByPage(ArtworkChange artworkChange, PageRequest pageRequest) {
-        return ResponseEntity.ok(this.artworkChangeService.queryByPage(artworkChange, pageRequest));
+    public R queryByPage(ArtworkChange artworkChange, PageRequest pageRequest) {
+                ResponseEntity.ok(this.artworkChangeService.queryByPage(artworkChange, pageRequest));
+        return null; 
     }
 
     /**
@@ -43,8 +45,9 @@ public class ArtworkChangeController {
      * @return 单条数据
      */
     @GetMapping("{id}")
-    public ResponseEntity<ArtworkChange> queryById(@PathVariable("id") String id) {
-        return ResponseEntity.ok(this.artworkChangeService.queryById(id));
+    public R queryById(@PathVariable("id") String id) {
+         ResponseEntity.ok(this.artworkChangeService.queryById(id));
+    return null;
     }
 
     /**
@@ -54,8 +57,9 @@ public class ArtworkChangeController {
      * @return 新增结果
      */
     @PostMapping
-    public ResponseEntity<ArtworkChange> add(ArtworkChange artworkChange) {
-        return ResponseEntity.ok(this.artworkChangeService.insert(artworkChange));
+    public R add(ArtworkChange artworkChange) {
+         ResponseEntity.ok(this.artworkChangeService.insert(artworkChange));
+     return null;
     }
 
     /**
@@ -65,8 +69,9 @@ public class ArtworkChangeController {
      * @return 编辑结果
      */
     @PutMapping
-    public ResponseEntity<ArtworkChange> edit(ArtworkChange artworkChange) {
-        return ResponseEntity.ok(this.artworkChangeService.update(artworkChange));
+    public R edit(ArtworkChange artworkChange) {
+         ResponseEntity.ok(this.artworkChangeService.update(artworkChange));
+     return null;
     }
 
     /**
@@ -76,8 +81,9 @@ public class ArtworkChangeController {
      * @return 删除是否成功
      */
     @DeleteMapping
-    public ResponseEntity<Boolean> deleteById(String id) {
-        return ResponseEntity.ok(this.artworkChangeService.deleteById(id));
+    public R deleteById(String id) {
+         ResponseEntity.ok(this.artworkChangeService.deleteById(id));
+     return null;
     }
 
 }

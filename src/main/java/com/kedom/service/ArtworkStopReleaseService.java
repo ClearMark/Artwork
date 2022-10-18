@@ -3,12 +3,13 @@ package com.kedom.service;
 import com.kedom.entity.ArtworkStopRelease;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import java.util.List;
 
 /**
  * 停止发布时返回的艺术品表(ArtworkStopRelease)表服务接口
  *
  * @author makejava
- * @since 2022-10-18 17:46:01
+ * @since 2022-10-18 23:12:54
  */
 public interface ArtworkStopReleaseService {
 
@@ -27,7 +28,7 @@ public interface ArtworkStopReleaseService {
      * @param pageRequest      分页对象
      * @return 查询结果
      */
-    Page<ArtworkStopRelease> queryByPage(ArtworkStopRelease artworkStopRelease, PageRequest pageRequest);
+    List<ArtworkStopRelease> queryByPage(ArtworkStopRelease artworkStopRelease, PageRequest pageRequest);
 
     /**
      * 新增数据
@@ -35,7 +36,7 @@ public interface ArtworkStopReleaseService {
      * @param artworkStopRelease 实例对象
      * @return 实例对象
      */
-    ArtworkStopRelease insert(ArtworkStopRelease artworkStopRelease);
+    Integer insert(ArtworkStopRelease artworkStopRelease);
 
     /**
      * 修改数据
@@ -43,7 +44,7 @@ public interface ArtworkStopReleaseService {
      * @param artworkStopRelease 实例对象
      * @return 实例对象
      */
-    ArtworkStopRelease update(ArtworkStopRelease artworkStopRelease);
+    Integer update(ArtworkStopRelease artworkStopRelease);
 
     /**
      * 通过主键删除数据
@@ -51,6 +52,6 @@ public interface ArtworkStopReleaseService {
      * @param artworkStopReleaseId 主键
      * @return 是否成功
      */
-    boolean deleteById(String artworkStopReleaseId);
+    Integer deleteById(String artworkStopReleaseId);
 
 }

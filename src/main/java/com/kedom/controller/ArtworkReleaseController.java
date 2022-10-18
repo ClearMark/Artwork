@@ -3,6 +3,7 @@ package com.kedom.controller;
 import com.kedom.entity.ArtworkRelease;
 import com.kedom.service.ArtworkReleaseService;
 import org.springframework.data.domain.Page;
+import com.kedom.entity.R;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,7 +14,7 @@ import javax.annotation.Resource;
  * 艺术品发布表(ArtworkRelease)表控制层
  *
  * @author makejava
- * @since 2022-10-18 17:46:00
+ * @since 2022-10-18 23:12:54
  */
 @RestController
 @RequestMapping("artworkRelease")
@@ -32,8 +33,9 @@ public class ArtworkReleaseController {
      * @return 查询结果
      */
     @GetMapping
-    public ResponseEntity<Page<ArtworkRelease>> queryByPage(ArtworkRelease artworkRelease, PageRequest pageRequest) {
-        return ResponseEntity.ok(this.artworkReleaseService.queryByPage(artworkRelease, pageRequest));
+    public R queryByPage(ArtworkRelease artworkRelease, PageRequest pageRequest) {
+                ResponseEntity.ok(this.artworkReleaseService.queryByPage(artworkRelease, pageRequest));
+        return null; 
     }
 
     /**
@@ -43,8 +45,9 @@ public class ArtworkReleaseController {
      * @return 单条数据
      */
     @GetMapping("{id}")
-    public ResponseEntity<ArtworkRelease> queryById(@PathVariable("id") String id) {
-        return ResponseEntity.ok(this.artworkReleaseService.queryById(id));
+    public R queryById(@PathVariable("id") String id) {
+         ResponseEntity.ok(this.artworkReleaseService.queryById(id));
+    return null;
     }
 
     /**
@@ -54,8 +57,9 @@ public class ArtworkReleaseController {
      * @return 新增结果
      */
     @PostMapping
-    public ResponseEntity<ArtworkRelease> add(ArtworkRelease artworkRelease) {
-        return ResponseEntity.ok(this.artworkReleaseService.insert(artworkRelease));
+    public R add(ArtworkRelease artworkRelease) {
+         ResponseEntity.ok(this.artworkReleaseService.insert(artworkRelease));
+     return null;
     }
 
     /**
@@ -65,8 +69,9 @@ public class ArtworkReleaseController {
      * @return 编辑结果
      */
     @PutMapping
-    public ResponseEntity<ArtworkRelease> edit(ArtworkRelease artworkRelease) {
-        return ResponseEntity.ok(this.artworkReleaseService.update(artworkRelease));
+    public R edit(ArtworkRelease artworkRelease) {
+         ResponseEntity.ok(this.artworkReleaseService.update(artworkRelease));
+     return null;
     }
 
     /**
@@ -76,8 +81,9 @@ public class ArtworkReleaseController {
      * @return 删除是否成功
      */
     @DeleteMapping
-    public ResponseEntity<Boolean> deleteById(String id) {
-        return ResponseEntity.ok(this.artworkReleaseService.deleteById(id));
+    public R deleteById(String id) {
+         ResponseEntity.ok(this.artworkReleaseService.deleteById(id));
+     return null;
     }
 
 }

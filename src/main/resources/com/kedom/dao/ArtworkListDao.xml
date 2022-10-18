@@ -88,26 +88,27 @@
     </select>
 
     <!--新增所有列-->
-    <insert id="insert" keyProperty="artworkId" useGeneratedKeys="true">
-        insert into artwork_list(artwork_name, total_count, first_release_username, artwork_origin, artwork_img_address, artwork_level, artwork_release_date)
-        values (#{artworkName}, #{totalCount}, #{firstReleaseUsername}, #{artworkOrigin}, #{artworkImgAddress}, #{artworkLevel}, #{artworkReleaseDate})
+    <insert id="insert" >
+        insert into artwork_list(artwork_id, artwork_name, total_count, first_release_username, artwork_origin, artwork_img_address, artwork_level, artwork_release_date)
+        values (#{artworkId}, #{artworkName}, #{totalCount}, #{firstReleaseUsername}, #{artworkOrigin}, #{artworkImgAddress}, #{artworkLevel}, #{artworkReleaseDate})
     </insert>
 
-    <insert id="insertBatch" keyProperty="artworkId" useGeneratedKeys="true">
-        insert into artwork_list(artwork_name, total_count, first_release_username, artwork_origin, artwork_img_address, artwork_level, artwork_release_date)
+    <insert id="insertBatch">
+        insert into artwork_list(artwork_id, artwork_name, total_count, first_release_username, artwork_origin, artwork_img_address, artwork_level, artwork_release_date)
         values
         <foreach collection="entities" item="entity" separator=",">
-        (#{entity.artworkName}, #{entity.totalCount}, #{entity.firstReleaseUsername}, #{entity.artworkOrigin}, #{entity.artworkImgAddress}, #{entity.artworkLevel}, #{entity.artworkReleaseDate})
+        (#{entity.artworkId}, #{entity.artworkName}, #{entity.totalCount}, #{entity.firstReleaseUsername}, #{entity.artworkOrigin}, #{entity.artworkImgAddress}, #{entity.artworkLevel}, #{entity.artworkReleaseDate})
         </foreach>
     </insert>
 
-    <insert id="insertOrUpdateBatch" keyProperty="artworkId" useGeneratedKeys="true">
+    <insert id="insertOrUpdateBatch">
         insert into artwork_list(artwork_name, total_count, first_release_username, artwork_origin, artwork_img_address, artwork_level, artwork_release_date)
         values
         <foreach collection="entities" item="entity" separator=",">
-            (#{entity.artworkName}, #{entity.totalCount}, #{entity.firstReleaseUsername}, #{entity.artworkOrigin}, #{entity.artworkImgAddress}, #{entity.artworkLevel}, #{entity.artworkReleaseDate})
+            (#{entity.artworkId}, #{entity.artworkName}, #{entity.totalCount}, #{entity.firstReleaseUsername}, #{entity.artworkOrigin}, #{entity.artworkImgAddress}, #{entity.artworkLevel}, #{entity.artworkReleaseDate})
         </foreach>
         on duplicate key update
+        artwork_id = values(artwork_id),
         artwork_name = values(artwork_name),
         total_count = values(total_count),
         first_release_username = values(first_release_username),

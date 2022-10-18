@@ -3,12 +3,13 @@ package com.kedom.service;
 import com.kedom.entity.AdminList;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import java.util.List;
 
 /**
  * 管理员表(AdminList)表服务接口
  *
  * @author makejava
- * @since 2022-10-18 17:45:51
+ * @since 2022-10-18 23:12:54
  */
 public interface AdminListService {
 
@@ -27,7 +28,7 @@ public interface AdminListService {
      * @param pageRequest      分页对象
      * @return 查询结果
      */
-    Page<AdminList> queryByPage(AdminList adminList, PageRequest pageRequest);
+    List<AdminList> queryByPage(AdminList adminList, PageRequest pageRequest);
 
     /**
      * 新增数据
@@ -35,7 +36,7 @@ public interface AdminListService {
      * @param adminList 实例对象
      * @return 实例对象
      */
-    AdminList insert(AdminList adminList);
+    Integer insert(AdminList adminList);
 
     /**
      * 修改数据
@@ -43,7 +44,7 @@ public interface AdminListService {
      * @param adminList 实例对象
      * @return 实例对象
      */
-    AdminList update(AdminList adminList);
+    Integer update(AdminList adminList);
 
     /**
      * 通过主键删除数据
@@ -51,6 +52,6 @@ public interface AdminListService {
      * @param id 主键
      * @return 是否成功
      */
-    boolean deleteById(Integer id);
+    Integer deleteById(Integer id);
 
 }

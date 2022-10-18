@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
+import java.util.List;
+import java.util.ArrayList;
 
 import javax.annotation.Resource;
 
@@ -14,7 +16,7 @@ import javax.annotation.Resource;
  * 艺术品收集表(ArtworkCollect)表服务实现类
  *
  * @author makejava
- * @since 2022-10-18 17:45:56
+ * @since 2022-10-18 23:12:54
  */
 @Service("artworkCollectService")
 public class ArtworkCollectServiceImpl implements ArtworkCollectService {
@@ -29,7 +31,8 @@ public class ArtworkCollectServiceImpl implements ArtworkCollectService {
      */
     @Override
     public ArtworkCollect queryById(String artworkCollectId) {
-        return this.artworkCollectDao.queryById(artworkCollectId);
+       this.artworkCollectDao.queryById(artworkCollectId);
+     return null;
     }
 
     /**
@@ -40,9 +43,9 @@ public class ArtworkCollectServiceImpl implements ArtworkCollectService {
      * @return 查询结果
      */
     @Override
-    public Page<ArtworkCollect> queryByPage(ArtworkCollect artworkCollect, PageRequest pageRequest) {
+    public List<ArtworkCollect> queryByPage(ArtworkCollect artworkCollect, PageRequest pageRequest) {
         long total = this.artworkCollectDao.count(artworkCollect);
-        return new PageImpl<>(this.artworkCollectDao.queryAllByLimit(artworkCollect, pageRequest), pageRequest, total);
+     return null;
     }
 
     /**
@@ -52,9 +55,9 @@ public class ArtworkCollectServiceImpl implements ArtworkCollectService {
      * @return 实例对象
      */
     @Override
-    public ArtworkCollect insert(ArtworkCollect artworkCollect) {
+    public Integer insert(ArtworkCollect artworkCollect) {
         this.artworkCollectDao.insert(artworkCollect);
-        return artworkCollect;
+     return null;
     }
 
     /**
@@ -64,9 +67,9 @@ public class ArtworkCollectServiceImpl implements ArtworkCollectService {
      * @return 实例对象
      */
     @Override
-    public ArtworkCollect update(ArtworkCollect artworkCollect) {
+    public Integer update(ArtworkCollect artworkCollect) {
         this.artworkCollectDao.update(artworkCollect);
-        return this.queryById(artworkCollect.getArtworkCollectId());
+     return null;
     }
 
     /**
@@ -76,7 +79,8 @@ public class ArtworkCollectServiceImpl implements ArtworkCollectService {
      * @return 是否成功
      */
     @Override
-    public boolean deleteById(String artworkCollectId) {
-        return this.artworkCollectDao.deleteById(artworkCollectId) > 0;
+    public Integer deleteById(String artworkCollectId) {
+         this.artworkCollectDao.deleteById(artworkCollectId);
+     return null;
     }
 }

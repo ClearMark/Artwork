@@ -1,9 +1,11 @@
 package com.kedom.controller;
 
+import com.kedom.annotation.RequestID;
 import com.kedom.entity.User;
 import com.kedom.myJavaUtils.ParameterValidation;
 import com.kedom.service.UserService;
 import org.springframework.data.domain.Page;
+import com.kedom.entity.R;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,7 +16,7 @@ import javax.annotation.Resource;
  * (User)表控制层
  *
  * @author makejava
- * @since 2022-10-18 17:46:23
+ * @since 2022-10-18 23:12:54
  */
 @RestController
 @RequestMapping("user")
@@ -33,8 +35,9 @@ public class UserController {
      * @return 查询结果
      */
     @GetMapping
-    public ResponseEntity<Page<User>> queryByPage(User user, PageRequest pageRequest) {
-        return ResponseEntity.ok(this.userService.queryByPage(user, pageRequest));
+    public R queryByPage(User user, PageRequest pageRequest) {
+                ResponseEntity.ok(this.userService.queryByPage(user, pageRequest));
+        return null; 
     }
 
     /**
@@ -44,8 +47,9 @@ public class UserController {
      * @return 单条数据
      */
     @GetMapping("{id}")
-    public ResponseEntity<User> queryById(@PathVariable("id") String id) {
-        return ResponseEntity.ok(this.userService.queryById(id));
+    public R queryById(@PathVariable("id") String id) {
+         ResponseEntity.ok(this.userService.queryById(id));
+    return null;
     }
 
     /**
@@ -55,11 +59,19 @@ public class UserController {
      * @return 新增结果
      */
     @PostMapping
-    public ResponseEntity<User> add(User user) {
+    public R add(User user) {
         ParameterValidation.checkNotNull(user);
         ParameterValidation.checkNotEmpty(user.getUsername());
         ParameterValidation.checkNotEmpty(user.getPassword());
-        return ResponseEntity.ok(this.userService.insert(user));
+        Integer insert = this.userService.insert(user);
+        if (insert>0)
+        {
+            return R.OK();
+        }
+        else
+        {
+            return R.Error();
+        }
     }
 
     /**
@@ -69,8 +81,9 @@ public class UserController {
      * @return 编辑结果
      */
     @PutMapping
-    public ResponseEntity<User> edit(User user) {
-        return ResponseEntity.ok(this.userService.update(user));
+    public R edit(User user) {
+         ResponseEntity.ok(this.userService.update(user));
+     return null;
     }
 
     /**
@@ -80,8 +93,9 @@ public class UserController {
      * @return 删除是否成功
      */
     @DeleteMapping
-    public ResponseEntity<Boolean> deleteById(String id) {
-        return ResponseEntity.ok(this.userService.deleteById(id));
+    public R deleteById(String id) {
+         ResponseEntity.ok(this.userService.deleteById(id));
+     return null;
     }
 
 }

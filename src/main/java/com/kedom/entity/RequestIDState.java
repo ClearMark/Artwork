@@ -1,5 +1,6 @@
 package com.kedom.entity;
 
+
 public class RequestIDState {
 
     final public static RequestIDState NOT_SUBMIT=new RequestIDState("服务未提交");

@@ -3,12 +3,13 @@ package com.kedom.service;
 import com.kedom.entity.ArtworkExamine;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import java.util.List;
 
 /**
  * 艺术品审批表(ArtworkExamine)表服务接口
  *
  * @author makejava
- * @since 2022-10-18 17:45:58
+ * @since 2022-10-18 23:12:54
  */
 public interface ArtworkExamineService {
 
@@ -27,7 +28,7 @@ public interface ArtworkExamineService {
      * @param pageRequest      分页对象
      * @return 查询结果
      */
-    Page<ArtworkExamine> queryByPage(ArtworkExamine artworkExamine, PageRequest pageRequest);
+    List<ArtworkExamine> queryByPage(ArtworkExamine artworkExamine, PageRequest pageRequest);
 
     /**
      * 新增数据
@@ -35,7 +36,7 @@ public interface ArtworkExamineService {
      * @param artworkExamine 实例对象
      * @return 实例对象
      */
-    ArtworkExamine insert(ArtworkExamine artworkExamine);
+    Integer insert(ArtworkExamine artworkExamine);
 
     /**
      * 修改数据
@@ -43,7 +44,7 @@ public interface ArtworkExamineService {
      * @param artworkExamine 实例对象
      * @return 实例对象
      */
-    ArtworkExamine update(ArtworkExamine artworkExamine);
+    Integer update(ArtworkExamine artworkExamine);
 
     /**
      * 通过主键删除数据
@@ -51,6 +52,6 @@ public interface ArtworkExamineService {
      * @param artworkId 主键
      * @return 是否成功
      */
-    boolean deleteById(String artworkId);
+    Integer deleteById(String artworkId);
 
 }

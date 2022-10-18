@@ -67,26 +67,27 @@
     </select>
 
     <!--新增所有列-->
-    <insert id="insert" keyProperty="artworkStopReleaseId" useGeneratedKeys="true">
-        insert into artwork_stop_release(artwork_id, artwork_count, artwork_data, artwork_release_id)
-        values (#{artworkId}, #{artworkCount}, #{artworkData}, #{artworkReleaseId})
+    <insert id="insert" >
+        insert into artwork_stop_release(artwork_stop_release_id, artwork_id, artwork_count, artwork_data, artwork_release_id)
+        values (#{artworkStopReleaseId}, #{artworkId}, #{artworkCount}, #{artworkData}, #{artworkReleaseId})
     </insert>
 
-    <insert id="insertBatch" keyProperty="artworkStopReleaseId" useGeneratedKeys="true">
-        insert into artwork_stop_release(artwork_id, artwork_count, artwork_data, artwork_release_id)
+    <insert id="insertBatch">
+        insert into artwork_stop_release(artwork_stop_release_id, artwork_id, artwork_count, artwork_data, artwork_release_id)
         values
         <foreach collection="entities" item="entity" separator=",">
-        (#{entity.artworkId}, #{entity.artworkCount}, #{entity.artworkData}, #{entity.artworkReleaseId})
+        (#{entity.artworkStopReleaseId}, #{entity.artworkId}, #{entity.artworkCount}, #{entity.artworkData}, #{entity.artworkReleaseId})
         </foreach>
     </insert>
 
-    <insert id="insertOrUpdateBatch" keyProperty="artworkStopReleaseId" useGeneratedKeys="true">
+    <insert id="insertOrUpdateBatch">
         insert into artwork_stop_release(artwork_id, artwork_count, artwork_data, artwork_release_id)
         values
         <foreach collection="entities" item="entity" separator=",">
-            (#{entity.artworkId}, #{entity.artworkCount}, #{entity.artworkData}, #{entity.artworkReleaseId})
+            (#{entity.artworkStopReleaseId}, #{entity.artworkId}, #{entity.artworkCount}, #{entity.artworkData}, #{entity.artworkReleaseId})
         </foreach>
         on duplicate key update
+        artwork_stop_release_id = values(artwork_stop_release_id),
         artwork_id = values(artwork_id),
         artwork_count = values(artwork_count),
         artwork_data = values(artwork_data),

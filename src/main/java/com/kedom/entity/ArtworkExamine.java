@@ -1,16 +1,19 @@
 package com.kedom.entity;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.io.Serializable;
+import lombok.Data;
 
+
+@Data
 /**
  * 艺术品审批表(ArtworkExamine)实体类
  *
  * @author makejava
- * @since 2022-10-18 17:45:57
+ * @since 2022-10-18 23:12:54
  */
 public class ArtworkExamine implements Serializable {
-    private static final long serialVersionUID = 769152199207779971L;
+    private static final long serialVersionUID = -12437529544630630L;
     /**
      * 艺术品编号
      */
@@ -42,7 +45,7 @@ public class ArtworkExamine implements Serializable {
     /**
      * 艺术品发布时间
      */
-    private Date artworkReleaseDate;
+    private LocalDateTime artworkReleaseDate;
     /**
      * 收集代码
      */
@@ -54,108 +57,12 @@ public class ArtworkExamine implements Serializable {
     /**
      * 审核时间
      */
-    private Date examineDate;
+    private LocalDateTime examineDate;
     /**
      * 审核状态 1 通过  2 未通过  3 审核中
      */
     private Integer examineState;
 
-
-    public String getArtworkId() {
-        return artworkId;
-    }
-
-    public void setArtworkId(String artworkId) {
-        this.artworkId = artworkId;
-    }
-
-    public String getArtworkName() {
-        return artworkName;
-    }
-
-    public void setArtworkName(String artworkName) {
-        this.artworkName = artworkName;
-    }
-
-    public Integer getReleaseCount() {
-        return releaseCount;
-    }
-
-    public void setReleaseCount(Integer releaseCount) {
-        this.releaseCount = releaseCount;
-    }
-
-    public String getReleaseUsername() {
-        return releaseUsername;
-    }
-
-    public void setReleaseUsername(String releaseUsername) {
-        this.releaseUsername = releaseUsername;
-    }
-
-    public String getArtworkOrigin() {
-        return artworkOrigin;
-    }
-
-    public void setArtworkOrigin(String artworkOrigin) {
-        this.artworkOrigin = artworkOrigin;
-    }
-
-    public String getArtworkImgAddress() {
-        return artworkImgAddress;
-    }
-
-    public void setArtworkImgAddress(String artworkImgAddress) {
-        this.artworkImgAddress = artworkImgAddress;
-    }
-
-    public Integer getArtworkLevel() {
-        return artworkLevel;
-    }
-
-    public void setArtworkLevel(Integer artworkLevel) {
-        this.artworkLevel = artworkLevel;
-    }
-
-    public Date getArtworkReleaseDate() {
-        return artworkReleaseDate;
-    }
-
-    public void setArtworkReleaseDate(Date artworkReleaseDate) {
-        this.artworkReleaseDate = artworkReleaseDate;
-    }
-
-    public String getArtworkCollectCode() {
-        return artworkCollectCode;
-    }
-
-    public void setArtworkCollectCode(String artworkCollectCode) {
-        this.artworkCollectCode = artworkCollectCode;
-    }
-
-    public Integer getExamineAdminId() {
-        return examineAdminId;
-    }
-
-    public void setExamineAdminId(Integer examineAdminId) {
-        this.examineAdminId = examineAdminId;
-    }
-
-    public Date getExamineDate() {
-        return examineDate;
-    }
-
-    public void setExamineDate(Date examineDate) {
-        this.examineDate = examineDate;
-    }
-
-    public Integer getExamineState() {
-        return examineState;
-    }
-
-    public void setExamineState(Integer examineState) {
-        this.examineState = examineState;
-    }
 
 }
 

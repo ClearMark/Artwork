@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
+import java.util.List;
+import java.util.ArrayList;
 
 import javax.annotation.Resource;
 
@@ -14,7 +16,7 @@ import javax.annotation.Resource;
  * 艺术品目录(ArtworkList)表服务实现类
  *
  * @author makejava
- * @since 2022-10-18 17:46:00
+ * @since 2022-10-18 23:12:54
  */
 @Service("artworkListService")
 public class ArtworkListServiceImpl implements ArtworkListService {
@@ -29,7 +31,8 @@ public class ArtworkListServiceImpl implements ArtworkListService {
      */
     @Override
     public ArtworkList queryById(String artworkId) {
-        return this.artworkListDao.queryById(artworkId);
+       this.artworkListDao.queryById(artworkId);
+     return null;
     }
 
     /**
@@ -40,9 +43,9 @@ public class ArtworkListServiceImpl implements ArtworkListService {
      * @return 查询结果
      */
     @Override
-    public Page<ArtworkList> queryByPage(ArtworkList artworkList, PageRequest pageRequest) {
+    public List<ArtworkList> queryByPage(ArtworkList artworkList, PageRequest pageRequest) {
         long total = this.artworkListDao.count(artworkList);
-        return new PageImpl<>(this.artworkListDao.queryAllByLimit(artworkList, pageRequest), pageRequest, total);
+     return null;
     }
 
     /**
@@ -52,9 +55,9 @@ public class ArtworkListServiceImpl implements ArtworkListService {
      * @return 实例对象
      */
     @Override
-    public ArtworkList insert(ArtworkList artworkList) {
+    public Integer insert(ArtworkList artworkList) {
         this.artworkListDao.insert(artworkList);
-        return artworkList;
+     return null;
     }
 
     /**
@@ -64,9 +67,9 @@ public class ArtworkListServiceImpl implements ArtworkListService {
      * @return 实例对象
      */
     @Override
-    public ArtworkList update(ArtworkList artworkList) {
+    public Integer update(ArtworkList artworkList) {
         this.artworkListDao.update(artworkList);
-        return this.queryById(artworkList.getArtworkId());
+     return null;
     }
 
     /**
@@ -76,7 +79,8 @@ public class ArtworkListServiceImpl implements ArtworkListService {
      * @return 是否成功
      */
     @Override
-    public boolean deleteById(String artworkId) {
-        return this.artworkListDao.deleteById(artworkId) > 0;
+    public Integer deleteById(String artworkId) {
+         this.artworkListDao.deleteById(artworkId);
+     return null;
     }
 }

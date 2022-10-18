@@ -3,6 +3,7 @@ package com.kedom.controller;
 import com.kedom.entity.ExceptionLog;
 import com.kedom.service.ExceptionLogService;
 import org.springframework.data.domain.Page;
+import com.kedom.entity.R;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,7 +14,7 @@ import javax.annotation.Resource;
  * (ExceptionLog)表控制层
  *
  * @author makejava
- * @since 2022-10-18 17:46:01
+ * @since 2022-10-18 23:12:54
  */
 @RestController
 @RequestMapping("exceptionLog")
@@ -32,8 +33,9 @@ public class ExceptionLogController {
      * @return 查询结果
      */
     @GetMapping
-    public ResponseEntity<Page<ExceptionLog>> queryByPage(ExceptionLog exceptionLog, PageRequest pageRequest) {
-        return ResponseEntity.ok(this.exceptionLogService.queryByPage(exceptionLog, pageRequest));
+    public R queryByPage(ExceptionLog exceptionLog, PageRequest pageRequest) {
+                ResponseEntity.ok(this.exceptionLogService.queryByPage(exceptionLog, pageRequest));
+        return null; 
     }
 
     /**
@@ -43,8 +45,9 @@ public class ExceptionLogController {
      * @return 单条数据
      */
     @GetMapping("{id}")
-    public ResponseEntity<ExceptionLog> queryById(@PathVariable("id") Integer id) {
-        return ResponseEntity.ok(this.exceptionLogService.queryById(id));
+    public R queryById(@PathVariable("id") Integer id) {
+         ResponseEntity.ok(this.exceptionLogService.queryById(id));
+    return null;
     }
 
     /**
@@ -54,8 +57,9 @@ public class ExceptionLogController {
      * @return 新增结果
      */
     @PostMapping
-    public ResponseEntity<ExceptionLog> add(ExceptionLog exceptionLog) {
-        return ResponseEntity.ok(this.exceptionLogService.insert(exceptionLog));
+    public R add(ExceptionLog exceptionLog) {
+         ResponseEntity.ok(this.exceptionLogService.insert(exceptionLog));
+     return null;
     }
 
     /**
@@ -65,8 +69,9 @@ public class ExceptionLogController {
      * @return 编辑结果
      */
     @PutMapping
-    public ResponseEntity<ExceptionLog> edit(ExceptionLog exceptionLog) {
-        return ResponseEntity.ok(this.exceptionLogService.update(exceptionLog));
+    public R edit(ExceptionLog exceptionLog) {
+         ResponseEntity.ok(this.exceptionLogService.update(exceptionLog));
+     return null;
     }
 
     /**
@@ -76,8 +81,9 @@ public class ExceptionLogController {
      * @return 删除是否成功
      */
     @DeleteMapping
-    public ResponseEntity<Boolean> deleteById(Integer id) {
-        return ResponseEntity.ok(this.exceptionLogService.deleteById(id));
+    public R deleteById(Integer id) {
+         ResponseEntity.ok(this.exceptionLogService.deleteById(id));
+     return null;
     }
 
 }

@@ -67,26 +67,27 @@
     </select>
 
     <!--新增所有列-->
-    <insert id="insert" keyProperty="artworkCollectId" useGeneratedKeys="true">
-        insert into artwork_collect(artwork_id, user_id, collect_code, artwork_collect_date)
-        values (#{artworkId}, #{userId}, #{collectCode}, #{artworkCollectDate})
+    <insert id="insert" >
+        insert into artwork_collect(artwork_collect_id, artwork_id, user_id, collect_code, artwork_collect_date)
+        values (#{artworkCollectId}, #{artworkId}, #{userId}, #{collectCode}, #{artworkCollectDate})
     </insert>
 
-    <insert id="insertBatch" keyProperty="artworkCollectId" useGeneratedKeys="true">
-        insert into artwork_collect(artwork_id, user_id, collect_code, artwork_collect_date)
+    <insert id="insertBatch">
+        insert into artwork_collect(artwork_collect_id, artwork_id, user_id, collect_code, artwork_collect_date)
         values
         <foreach collection="entities" item="entity" separator=",">
-        (#{entity.artworkId}, #{entity.userId}, #{entity.collectCode}, #{entity.artworkCollectDate})
+        (#{entity.artworkCollectId}, #{entity.artworkId}, #{entity.userId}, #{entity.collectCode}, #{entity.artworkCollectDate})
         </foreach>
     </insert>
 
-    <insert id="insertOrUpdateBatch" keyProperty="artworkCollectId" useGeneratedKeys="true">
+    <insert id="insertOrUpdateBatch">
         insert into artwork_collect(artwork_id, user_id, collect_code, artwork_collect_date)
         values
         <foreach collection="entities" item="entity" separator=",">
-            (#{entity.artworkId}, #{entity.userId}, #{entity.collectCode}, #{entity.artworkCollectDate})
+            (#{entity.artworkCollectId}, #{entity.artworkId}, #{entity.userId}, #{entity.collectCode}, #{entity.artworkCollectDate})
         </foreach>
         on duplicate key update
+        artwork_collect_id = values(artwork_collect_id),
         artwork_id = values(artwork_id),
         user_id = values(user_id),
         collect_code = values(collect_code),

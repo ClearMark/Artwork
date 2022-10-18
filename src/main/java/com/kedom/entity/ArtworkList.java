@@ -1,16 +1,19 @@
 package com.kedom.entity;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.io.Serializable;
+import lombok.Data;
 
+
+@Data
 /**
  * 艺术品目录(ArtworkList)实体类
  *
  * @author makejava
- * @since 2022-10-18 17:45:59
+ * @since 2022-10-18 23:12:54
  */
 public class ArtworkList implements Serializable {
-    private static final long serialVersionUID = -52158943021135715L;
+    private static final long serialVersionUID = 204841789591238385L;
     /**
      * 艺术品编号
      */
@@ -42,72 +45,8 @@ public class ArtworkList implements Serializable {
     /**
      * 艺术品发布时间
      */
-    private Date artworkReleaseDate;
+    private LocalDateTime artworkReleaseDate;
 
-
-    public String getArtworkId() {
-        return artworkId;
-    }
-
-    public void setArtworkId(String artworkId) {
-        this.artworkId = artworkId;
-    }
-
-    public String getArtworkName() {
-        return artworkName;
-    }
-
-    public void setArtworkName(String artworkName) {
-        this.artworkName = artworkName;
-    }
-
-    public Integer getTotalCount() {
-        return totalCount;
-    }
-
-    public void setTotalCount(Integer totalCount) {
-        this.totalCount = totalCount;
-    }
-
-    public String getFirstReleaseUsername() {
-        return firstReleaseUsername;
-    }
-
-    public void setFirstReleaseUsername(String firstReleaseUsername) {
-        this.firstReleaseUsername = firstReleaseUsername;
-    }
-
-    public String getArtworkOrigin() {
-        return artworkOrigin;
-    }
-
-    public void setArtworkOrigin(String artworkOrigin) {
-        this.artworkOrigin = artworkOrigin;
-    }
-
-    public String getArtworkImgAddress() {
-        return artworkImgAddress;
-    }
-
-    public void setArtworkImgAddress(String artworkImgAddress) {
-        this.artworkImgAddress = artworkImgAddress;
-    }
-
-    public Integer getArtworkLevel() {
-        return artworkLevel;
-    }
-
-    public void setArtworkLevel(Integer artworkLevel) {
-        this.artworkLevel = artworkLevel;
-    }
-
-    public Date getArtworkReleaseDate() {
-        return artworkReleaseDate;
-    }
-
-    public void setArtworkReleaseDate(Date artworkReleaseDate) {
-        this.artworkReleaseDate = artworkReleaseDate;
-    }
 
 }
 

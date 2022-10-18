@@ -74,26 +74,27 @@
     </select>
 
     <!--新增所有列-->
-    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
-        insert into exception_log(exception_url, exception_class_name, exception_method_name, exception_message, exception_time)
-        values (#{exceptionUrl}, #{exceptionClassName}, #{exceptionMethodName}, #{exceptionMessage}, #{exceptionTime})
+    <insert id="insert" >
+        insert into exception_log(id, exception_url, exception_class_name, exception_method_name, exception_message, exception_time)
+        values (#{id}, #{exceptionUrl}, #{exceptionClassName}, #{exceptionMethodName}, #{exceptionMessage}, #{exceptionTime})
     </insert>
 
-    <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true">
-        insert into exception_log(exception_url, exception_class_name, exception_method_name, exception_message, exception_time)
+    <insert id="insertBatch">
+        insert into exception_log(id, exception_url, exception_class_name, exception_method_name, exception_message, exception_time)
         values
         <foreach collection="entities" item="entity" separator=",">
-        (#{entity.exceptionUrl}, #{entity.exceptionClassName}, #{entity.exceptionMethodName}, #{entity.exceptionMessage}, #{entity.exceptionTime})
+        (#{entity.id}, #{entity.exceptionUrl}, #{entity.exceptionClassName}, #{entity.exceptionMethodName}, #{entity.exceptionMessage}, #{entity.exceptionTime})
         </foreach>
     </insert>
 
-    <insert id="insertOrUpdateBatch" keyProperty="id" useGeneratedKeys="true">
+    <insert id="insertOrUpdateBatch">
         insert into exception_log(exception_url, exception_class_name, exception_method_name, exception_message, exception_time)
         values
         <foreach collection="entities" item="entity" separator=",">
-            (#{entity.exceptionUrl}, #{entity.exceptionClassName}, #{entity.exceptionMethodName}, #{entity.exceptionMessage}, #{entity.exceptionTime})
+            (#{entity.id}, #{entity.exceptionUrl}, #{entity.exceptionClassName}, #{entity.exceptionMethodName}, #{entity.exceptionMessage}, #{entity.exceptionTime})
         </foreach>
         on duplicate key update
+        id = values(id),
         exception_url = values(exception_url),
         exception_class_name = values(exception_class_name),
         exception_method_name = values(exception_method_name),

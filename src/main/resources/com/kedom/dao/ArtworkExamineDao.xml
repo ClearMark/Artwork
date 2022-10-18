@@ -116,26 +116,27 @@
     </select>
 
     <!--新增所有列-->
-    <insert id="insert" keyProperty="artworkId" useGeneratedKeys="true">
-        insert into artwork_examine(artwork_name, release_count, release_username, artwork_origin, artwork_img_address, artwork_level, artwork_release_date, artwork_collect_code, examine_admin_id, examine_date, examine_state)
-        values (#{artworkName}, #{releaseCount}, #{releaseUsername}, #{artworkOrigin}, #{artworkImgAddress}, #{artworkLevel}, #{artworkReleaseDate}, #{artworkCollectCode}, #{examineAdminId}, #{examineDate}, #{examineState})
+    <insert id="insert" >
+        insert into artwork_examine(artwork_id, artwork_name, release_count, release_username, artwork_origin, artwork_img_address, artwork_level, artwork_release_date, artwork_collect_code, examine_admin_id, examine_date, examine_state)
+        values (#{artworkId}, #{artworkName}, #{releaseCount}, #{releaseUsername}, #{artworkOrigin}, #{artworkImgAddress}, #{artworkLevel}, #{artworkReleaseDate}, #{artworkCollectCode}, #{examineAdminId}, #{examineDate}, #{examineState})
     </insert>
 
-    <insert id="insertBatch" keyProperty="artworkId" useGeneratedKeys="true">
-        insert into artwork_examine(artwork_name, release_count, release_username, artwork_origin, artwork_img_address, artwork_level, artwork_release_date, artwork_collect_code, examine_admin_id, examine_date, examine_state)
+    <insert id="insertBatch">
+        insert into artwork_examine(artwork_id, artwork_name, release_count, release_username, artwork_origin, artwork_img_address, artwork_level, artwork_release_date, artwork_collect_code, examine_admin_id, examine_date, examine_state)
         values
         <foreach collection="entities" item="entity" separator=",">
-        (#{entity.artworkName}, #{entity.releaseCount}, #{entity.releaseUsername}, #{entity.artworkOrigin}, #{entity.artworkImgAddress}, #{entity.artworkLevel}, #{entity.artworkReleaseDate}, #{entity.artworkCollectCode}, #{entity.examineAdminId}, #{entity.examineDate}, #{entity.examineState})
+        (#{entity.artworkId}, #{entity.artworkName}, #{entity.releaseCount}, #{entity.releaseUsername}, #{entity.artworkOrigin}, #{entity.artworkImgAddress}, #{entity.artworkLevel}, #{entity.artworkReleaseDate}, #{entity.artworkCollectCode}, #{entity.examineAdminId}, #{entity.examineDate}, #{entity.examineState})
         </foreach>
     </insert>
 
-    <insert id="insertOrUpdateBatch" keyProperty="artworkId" useGeneratedKeys="true">
+    <insert id="insertOrUpdateBatch">
         insert into artwork_examine(artwork_name, release_count, release_username, artwork_origin, artwork_img_address, artwork_level, artwork_release_date, artwork_collect_code, examine_admin_id, examine_date, examine_state)
         values
         <foreach collection="entities" item="entity" separator=",">
-            (#{entity.artworkName}, #{entity.releaseCount}, #{entity.releaseUsername}, #{entity.artworkOrigin}, #{entity.artworkImgAddress}, #{entity.artworkLevel}, #{entity.artworkReleaseDate}, #{entity.artworkCollectCode}, #{entity.examineAdminId}, #{entity.examineDate}, #{entity.examineState})
+            (#{entity.artworkId}, #{entity.artworkName}, #{entity.releaseCount}, #{entity.releaseUsername}, #{entity.artworkOrigin}, #{entity.artworkImgAddress}, #{entity.artworkLevel}, #{entity.artworkReleaseDate}, #{entity.artworkCollectCode}, #{entity.examineAdminId}, #{entity.examineDate}, #{entity.examineState})
         </foreach>
         on duplicate key update
+        artwork_id = values(artwork_id),
         artwork_name = values(artwork_name),
         release_count = values(release_count),
         release_username = values(release_username),

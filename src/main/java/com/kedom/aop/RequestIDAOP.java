@@ -13,14 +13,14 @@ import org.springframework.stereotype.Component;
 @Order(1)
 public class RequestIDAOP {
 
-    @Pointcut("@annotation(com.kedom.annotation.RequestID)        ")
-    private void pt1() {}
-
-    @Around("pt1()")
-    public Object around(ProceedingJoinPoint pjp) throws Throwable {
-        Object[] args = pjp.getArgs();
-
-        return null;
-    }
+//    @Pointcut("@annotation(com.kedom.annotation.RequestID)        ")
+//    private void pt1() {}
+//
+//    @Around("pt1()")
+//    public Object around(ProceedingJoinPoint pjp) throws Throwable {
+//        Object[] args = pjp.getArgs();
+//
+//        return null;
+//    }
 
 }

@@ -3,6 +3,7 @@ package com.kedom.controller;
 import com.kedom.entity.AdminList;
 import com.kedom.service.AdminListService;
 import org.springframework.data.domain.Page;
+import com.kedom.entity.R;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,7 +14,7 @@ import javax.annotation.Resource;
  * 管理员表(AdminList)表控制层
  *
  * @author makejava
- * @since 2022-10-18 17:45:48
+ * @since 2022-10-18 23:12:54
  */
 @RestController
 @RequestMapping("adminList")
@@ -32,8 +33,9 @@ public class AdminListController {
      * @return 查询结果
      */
     @GetMapping
-    public ResponseEntity<Page<AdminList>> queryByPage(AdminList adminList, PageRequest pageRequest) {
-        return ResponseEntity.ok(this.adminListService.queryByPage(adminList, pageRequest));
+    public R queryByPage(AdminList adminList, PageRequest pageRequest) {
+                ResponseEntity.ok(this.adminListService.queryByPage(adminList, pageRequest));
+        return null; 
     }
 
     /**
@@ -43,8 +45,9 @@ public class AdminListController {
      * @return 单条数据
      */
     @GetMapping("{id}")
-    public ResponseEntity<AdminList> queryById(@PathVariable("id") Integer id) {
-        return ResponseEntity.ok(this.adminListService.queryById(id));
+    public R queryById(@PathVariable("id") Integer id) {
+         ResponseEntity.ok(this.adminListService.queryById(id));
+    return null;
     }
 
     /**
@@ -54,8 +57,9 @@ public class AdminListController {
      * @return 新增结果
      */
     @PostMapping
-    public ResponseEntity<AdminList> add(AdminList adminList) {
-        return ResponseEntity.ok(this.adminListService.insert(adminList));
+    public R add(AdminList adminList) {
+         ResponseEntity.ok(this.adminListService.insert(adminList));
+     return null;
     }
 
     /**
@@ -65,8 +69,9 @@ public class AdminListController {
      * @return 编辑结果
      */
     @PutMapping
-    public ResponseEntity<AdminList> edit(AdminList adminList) {
-        return ResponseEntity.ok(this.adminListService.update(adminList));
+    public R edit(AdminList adminList) {
+         ResponseEntity.ok(this.adminListService.update(adminList));
+     return null;
     }
 
     /**
@@ -76,8 +81,9 @@ public class AdminListController {
      * @return 删除是否成功
      */
     @DeleteMapping
-    public ResponseEntity<Boolean> deleteById(Integer id) {
-        return ResponseEntity.ok(this.adminListService.deleteById(id));
+    public R deleteById(Integer id) {
+         ResponseEntity.ok(this.adminListService.deleteById(id));
+     return null;
     }
 
 }

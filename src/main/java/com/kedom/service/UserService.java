@@ -3,12 +3,13 @@ package com.kedom.service;
 import com.kedom.entity.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import java.util.List;
 
 /**
  * (User)表服务接口
  *
  * @author makejava
- * @since 2022-10-18 17:46:26
+ * @since 2022-10-18 23:12:54
  */
 public interface UserService {
 
@@ -27,7 +28,7 @@ public interface UserService {
      * @param pageRequest      分页对象
      * @return 查询结果
      */
-    Page<User> queryByPage(User user, PageRequest pageRequest);
+    List<User> queryByPage(User user, PageRequest pageRequest);
 
     /**
      * 新增数据
@@ -35,7 +36,7 @@ public interface UserService {
      * @param user 实例对象
      * @return 实例对象
      */
-    User insert(User user);
+    Integer insert(User user);
 
     /**
      * 修改数据
@@ -43,7 +44,7 @@ public interface UserService {
      * @param user 实例对象
      * @return 实例对象
      */
-    User update(User user);
+    Integer update(User user);
 
     /**
      * 通过主键删除数据
@@ -51,6 +52,6 @@ public interface UserService {
      * @param userId 主键
      * @return 是否成功
      */
-    boolean deleteById(String userId);
+    Integer deleteById(String userId);
 
 }

@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
+import java.util.List;
+import java.util.ArrayList;
 
 import javax.annotation.Resource;
 
@@ -14,7 +16,7 @@ import javax.annotation.Resource;
  * 艺术品审批表(ArtworkExamine)表服务实现类
  *
  * @author makejava
- * @since 2022-10-18 17:45:58
+ * @since 2022-10-18 23:12:54
  */
 @Service("artworkExamineService")
 public class ArtworkExamineServiceImpl implements ArtworkExamineService {
@@ -29,7 +31,8 @@ public class ArtworkExamineServiceImpl implements ArtworkExamineService {
      */
     @Override
     public ArtworkExamine queryById(String artworkId) {
-        return this.artworkExamineDao.queryById(artworkId);
+       this.artworkExamineDao.queryById(artworkId);
+     return null;
     }
 
     /**
@@ -40,9 +43,9 @@ public class ArtworkExamineServiceImpl implements ArtworkExamineService {
      * @return 查询结果
      */
     @Override
-    public Page<ArtworkExamine> queryByPage(ArtworkExamine artworkExamine, PageRequest pageRequest) {
+    public List<ArtworkExamine> queryByPage(ArtworkExamine artworkExamine, PageRequest pageRequest) {
         long total = this.artworkExamineDao.count(artworkExamine);
-        return new PageImpl<>(this.artworkExamineDao.queryAllByLimit(artworkExamine, pageRequest), pageRequest, total);
+     return null;
     }
 
     /**
@@ -52,9 +55,9 @@ public class ArtworkExamineServiceImpl implements ArtworkExamineService {
      * @return 实例对象
      */
     @Override
-    public ArtworkExamine insert(ArtworkExamine artworkExamine) {
+    public Integer insert(ArtworkExamine artworkExamine) {
         this.artworkExamineDao.insert(artworkExamine);
-        return artworkExamine;
+     return null;
     }
 
     /**
@@ -64,9 +67,9 @@ public class ArtworkExamineServiceImpl implements ArtworkExamineService {
      * @return 实例对象
      */
     @Override
-    public ArtworkExamine update(ArtworkExamine artworkExamine) {
+    public Integer update(ArtworkExamine artworkExamine) {
         this.artworkExamineDao.update(artworkExamine);
-        return this.queryById(artworkExamine.getArtworkId());
+     return null;
     }
 
     /**
@@ -76,7 +79,8 @@ public class ArtworkExamineServiceImpl implements ArtworkExamineService {
      * @return 是否成功
      */
     @Override
-    public boolean deleteById(String artworkId) {
-        return this.artworkExamineDao.deleteById(artworkId) > 0;
+    public Integer deleteById(String artworkId) {
+         this.artworkExamineDao.deleteById(artworkId);
+     return null;
     }
 }

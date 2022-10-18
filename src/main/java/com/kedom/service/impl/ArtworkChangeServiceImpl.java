@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
+import java.util.List;
+import java.util.ArrayList;
 
 import javax.annotation.Resource;
 
@@ -14,7 +16,7 @@ import javax.annotation.Resource;
  * 艺术品的获取去出售记录(ArtworkChange)表服务实现类
  *
  * @author makejava
- * @since 2022-10-18 17:45:54
+ * @since 2022-10-18 23:12:54
  */
 @Service("artworkChangeService")
 public class ArtworkChangeServiceImpl implements ArtworkChangeService {
@@ -29,7 +31,8 @@ public class ArtworkChangeServiceImpl implements ArtworkChangeService {
      */
     @Override
     public ArtworkChange queryById(String artworkChangeId) {
-        return this.artworkChangeDao.queryById(artworkChangeId);
+       this.artworkChangeDao.queryById(artworkChangeId);
+     return null;
     }
 
     /**
@@ -40,9 +43,9 @@ public class ArtworkChangeServiceImpl implements ArtworkChangeService {
      * @return 查询结果
      */
     @Override
-    public Page<ArtworkChange> queryByPage(ArtworkChange artworkChange, PageRequest pageRequest) {
+    public List<ArtworkChange> queryByPage(ArtworkChange artworkChange, PageRequest pageRequest) {
         long total = this.artworkChangeDao.count(artworkChange);
-        return new PageImpl<>(this.artworkChangeDao.queryAllByLimit(artworkChange, pageRequest), pageRequest, total);
+     return null;
     }
 
     /**
@@ -52,9 +55,9 @@ public class ArtworkChangeServiceImpl implements ArtworkChangeService {
      * @return 实例对象
      */
     @Override
-    public ArtworkChange insert(ArtworkChange artworkChange) {
+    public Integer insert(ArtworkChange artworkChange) {
         this.artworkChangeDao.insert(artworkChange);
-        return artworkChange;
+     return null;
     }
 
     /**
@@ -64,9 +67,9 @@ public class ArtworkChangeServiceImpl implements ArtworkChangeService {
      * @return 实例对象
      */
     @Override
-    public ArtworkChange update(ArtworkChange artworkChange) {
+    public Integer update(ArtworkChange artworkChange) {
         this.artworkChangeDao.update(artworkChange);
-        return this.queryById(artworkChange.getArtworkChangeId());
+     return null;
     }
 
     /**
@@ -76,7 +79,8 @@ public class ArtworkChangeServiceImpl implements ArtworkChangeService {
      * @return 是否成功
      */
     @Override
-    public boolean deleteById(String artworkChangeId) {
-        return this.artworkChangeDao.deleteById(artworkChangeId) > 0;
+    public Integer deleteById(String artworkChangeId) {
+         this.artworkChangeDao.deleteById(artworkChangeId);
+     return null;
     }
 }

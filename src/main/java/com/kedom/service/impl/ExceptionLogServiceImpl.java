@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
+import java.util.List;
+import java.util.ArrayList;
 
 import javax.annotation.Resource;
 
@@ -14,7 +16,7 @@ import javax.annotation.Resource;
  * (ExceptionLog)表服务实现类
  *
  * @author makejava
- * @since 2022-10-18 17:46:02
+ * @since 2022-10-18 23:12:54
  */
 @Service("exceptionLogService")
 public class ExceptionLogServiceImpl implements ExceptionLogService {
@@ -29,7 +31,8 @@ public class ExceptionLogServiceImpl implements ExceptionLogService {
      */
     @Override
     public ExceptionLog queryById(Integer id) {
-        return this.exceptionLogDao.queryById(id);
+       this.exceptionLogDao.queryById(id);
+     return null;
     }
 
     /**
@@ -40,9 +43,9 @@ public class ExceptionLogServiceImpl implements ExceptionLogService {
      * @return 查询结果
      */
     @Override
-    public Page<ExceptionLog> queryByPage(ExceptionLog exceptionLog, PageRequest pageRequest) {
+    public List<ExceptionLog> queryByPage(ExceptionLog exceptionLog, PageRequest pageRequest) {
         long total = this.exceptionLogDao.count(exceptionLog);
-        return new PageImpl<>(this.exceptionLogDao.queryAllByLimit(exceptionLog, pageRequest), pageRequest, total);
+     return null;
     }
 
     /**
@@ -52,9 +55,9 @@ public class ExceptionLogServiceImpl implements ExceptionLogService {
      * @return 实例对象
      */
     @Override
-    public ExceptionLog insert(ExceptionLog exceptionLog) {
+    public Integer insert(ExceptionLog exceptionLog) {
         this.exceptionLogDao.insert(exceptionLog);
-        return exceptionLog;
+     return null;
     }
 
     /**
@@ -64,9 +67,9 @@ public class ExceptionLogServiceImpl implements ExceptionLogService {
      * @return 实例对象
      */
     @Override
-    public ExceptionLog update(ExceptionLog exceptionLog) {
+    public Integer update(ExceptionLog exceptionLog) {
         this.exceptionLogDao.update(exceptionLog);
-        return this.queryById(exceptionLog.getId());
+     return null;
     }
 
     /**
@@ -76,7 +79,8 @@ public class ExceptionLogServiceImpl implements ExceptionLogService {
      * @return 是否成功
      */
     @Override
-    public boolean deleteById(Integer id) {
-        return this.exceptionLogDao.deleteById(id) > 0;
+    public Integer deleteById(Integer id) {
+         this.exceptionLogDao.deleteById(id);
+     return null;
     }
 }

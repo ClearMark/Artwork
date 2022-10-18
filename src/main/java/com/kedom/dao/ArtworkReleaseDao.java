@@ -4,13 +4,16 @@ import com.kedom.entity.ArtworkRelease;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.data.domain.Pageable;
 import java.util.List;
+import org.apache.ibatis.annotations.Mapper;
+
 
 /**
  * 艺术品发布表(ArtworkRelease)表数据库访问层
  *
  * @author makejava
- * @since 2022-10-18 17:46:00
+ * @since 2022-10-18 23:12:54
  */
+@Mapper
 public interface ArtworkReleaseDao {
 
     /**
@@ -44,7 +47,7 @@ public interface ArtworkReleaseDao {
      * @param artworkRelease 实例对象
      * @return 影响行数
      */
-    int insert(ArtworkRelease artworkRelease);
+    Integer insert(ArtworkRelease artworkRelease);
 
     /**
      * 批量新增数据（MyBatis原生foreach方法）
@@ -52,7 +55,7 @@ public interface ArtworkReleaseDao {
      * @param entities List<ArtworkRelease> 实例对象列表
      * @return 影响行数
      */
-    int insertBatch(@Param("entities") List<ArtworkRelease> entities);
+    Integer insertBatch(@Param("entities") List<ArtworkRelease> entities);
 
     /**
      * 批量新增或按主键更新数据（MyBatis原生foreach方法）
@@ -61,7 +64,7 @@ public interface ArtworkReleaseDao {
      * @return 影响行数
      * @throws org.springframework.jdbc.BadSqlGrammarException 入参是空List的时候会抛SQL语句错误的异常，请自行校验入参
      */
-    int insertOrUpdateBatch(@Param("entities") List<ArtworkRelease> entities);
+    Integer insertOrUpdateBatch(@Param("entities") List<ArtworkRelease> entities);
 
     /**
      * 修改数据
@@ -69,7 +72,7 @@ public interface ArtworkReleaseDao {
      * @param artworkRelease 实例对象
      * @return 影响行数
      */
-    int update(ArtworkRelease artworkRelease);
+    Integer update(ArtworkRelease artworkRelease);
 
     /**
      * 通过主键删除数据
@@ -77,7 +80,7 @@ public interface ArtworkReleaseDao {
      * @param artworkReleaseId 主键
      * @return 影响行数
      */
-    int deleteById(String artworkReleaseId);
+    Integer deleteById(String artworkReleaseId);
 
 }
 

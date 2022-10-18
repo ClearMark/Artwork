@@ -4,13 +4,16 @@ import com.kedom.entity.AdminList;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.data.domain.Pageable;
 import java.util.List;
+import org.apache.ibatis.annotations.Mapper;
+
 
 /**
  * 管理员表(AdminList)表数据库访问层
  *
  * @author makejava
- * @since 2022-10-18 17:45:50
+ * @since 2022-10-18 23:12:54
  */
+@Mapper
 public interface AdminListDao {
 
     /**
@@ -44,7 +47,7 @@ public interface AdminListDao {
      * @param adminList 实例对象
      * @return 影响行数
      */
-    int insert(AdminList adminList);
+    Integer insert(AdminList adminList);
 
     /**
      * 批量新增数据（MyBatis原生foreach方法）
@@ -52,7 +55,7 @@ public interface AdminListDao {
      * @param entities List<AdminList> 实例对象列表
      * @return 影响行数
      */
-    int insertBatch(@Param("entities") List<AdminList> entities);
+    Integer insertBatch(@Param("entities") List<AdminList> entities);
 
     /**
      * 批量新增或按主键更新数据（MyBatis原生foreach方法）
@@ -61,7 +64,7 @@ public interface AdminListDao {
      * @return 影响行数
      * @throws org.springframework.jdbc.BadSqlGrammarException 入参是空List的时候会抛SQL语句错误的异常，请自行校验入参
      */
-    int insertOrUpdateBatch(@Param("entities") List<AdminList> entities);
+    Integer insertOrUpdateBatch(@Param("entities") List<AdminList> entities);
 
     /**
      * 修改数据
@@ -69,7 +72,7 @@ public interface AdminListDao {
      * @param adminList 实例对象
      * @return 影响行数
      */
-    int update(AdminList adminList);
+    Integer update(AdminList adminList);
 
     /**
      * 通过主键删除数据
@@ -77,7 +80,7 @@ public interface AdminListDao {
      * @param id 主键
      * @return 影响行数
      */
-    int deleteById(Integer id);
+    Integer deleteById(Integer id);
 
 }
 

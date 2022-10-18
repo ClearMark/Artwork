@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
+import java.util.List;
+import java.util.ArrayList;
 
 import javax.annotation.Resource;
 
@@ -14,7 +16,7 @@ import javax.annotation.Resource;
  * 管理员表(AdminList)表服务实现类
  *
  * @author makejava
- * @since 2022-10-18 17:45:52
+ * @since 2022-10-18 23:12:54
  */
 @Service("adminListService")
 public class AdminListServiceImpl implements AdminListService {
@@ -29,7 +31,8 @@ public class AdminListServiceImpl implements AdminListService {
      */
     @Override
     public AdminList queryById(Integer id) {
-        return this.adminListDao.queryById(id);
+       this.adminListDao.queryById(id);
+     return null;
     }
 
     /**
@@ -40,9 +43,9 @@ public class AdminListServiceImpl implements AdminListService {
      * @return 查询结果
      */
     @Override
-    public Page<AdminList> queryByPage(AdminList adminList, PageRequest pageRequest) {
+    public List<AdminList> queryByPage(AdminList adminList, PageRequest pageRequest) {
         long total = this.adminListDao.count(adminList);
-        return new PageImpl<>(this.adminListDao.queryAllByLimit(adminList, pageRequest), pageRequest, total);
+     return null;
     }
 
     /**
@@ -52,9 +55,9 @@ public class AdminListServiceImpl implements AdminListService {
      * @return 实例对象
      */
     @Override
-    public AdminList insert(AdminList adminList) {
+    public Integer insert(AdminList adminList) {
         this.adminListDao.insert(adminList);
-        return adminList;
+     return null;
     }
 
     /**
@@ -64,9 +67,9 @@ public class AdminListServiceImpl implements AdminListService {
      * @return 实例对象
      */
     @Override
-    public AdminList update(AdminList adminList) {
+    public Integer update(AdminList adminList) {
         this.adminListDao.update(adminList);
-        return this.queryById(adminList.getId());
+     return null;
     }
 
     /**
@@ -76,7 +79,8 @@ public class AdminListServiceImpl implements AdminListService {
      * @return 是否成功
      */
     @Override
-    public boolean deleteById(Integer id) {
-        return this.adminListDao.deleteById(id) > 0;
+    public Integer deleteById(Integer id) {
+         this.adminListDao.deleteById(id);
+     return null;
     }
 }

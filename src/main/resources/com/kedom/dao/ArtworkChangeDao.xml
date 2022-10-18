@@ -74,26 +74,27 @@
     </select>
 
     <!--新增所有列-->
-    <insert id="insert" keyProperty="artworkChangeId" useGeneratedKeys="true">
-        insert into artwork_change(artwork_id, user_id, artwork_count_change, change_date, change_mode)
-        values (#{artworkId}, #{userId}, #{artworkCountChange}, #{changeDate}, #{changeMode})
+    <insert id="insert" >
+        insert into artwork_change(artwork_change_id, artwork_id, user_id, artwork_count_change, change_date, change_mode)
+        values (#{artworkChangeId}, #{artworkId}, #{userId}, #{artworkCountChange}, #{changeDate}, #{changeMode})
     </insert>
 
-    <insert id="insertBatch" keyProperty="artworkChangeId" useGeneratedKeys="true">
-        insert into artwork_change(artwork_id, user_id, artwork_count_change, change_date, change_mode)
+    <insert id="insertBatch">
+        insert into artwork_change(artwork_change_id, artwork_id, user_id, artwork_count_change, change_date, change_mode)
         values
         <foreach collection="entities" item="entity" separator=",">
-        (#{entity.artworkId}, #{entity.userId}, #{entity.artworkCountChange}, #{entity.changeDate}, #{entity.changeMode})
+        (#{entity.artworkChangeId}, #{entity.artworkId}, #{entity.userId}, #{entity.artworkCountChange}, #{entity.changeDate}, #{entity.changeMode})
         </foreach>
     </insert>
 
-    <insert id="insertOrUpdateBatch" keyProperty="artworkChangeId" useGeneratedKeys="true">
+    <insert id="insertOrUpdateBatch">
         insert into artwork_change(artwork_id, user_id, artwork_count_change, change_date, change_mode)
         values
         <foreach collection="entities" item="entity" separator=",">
-            (#{entity.artworkId}, #{entity.userId}, #{entity.artworkCountChange}, #{entity.changeDate}, #{entity.changeMode})
+            (#{entity.artworkChangeId}, #{entity.artworkId}, #{entity.userId}, #{entity.artworkCountChange}, #{entity.changeDate}, #{entity.changeMode})
         </foreach>
         on duplicate key update
+        artwork_change_id = values(artwork_change_id),
         artwork_id = values(artwork_id),
         user_id = values(user_id),
         artwork_count_change = values(artwork_count_change),

@@ -2,11 +2,14 @@ package com.kedom.service.impl;
 
 import com.kedom.entity.User;
 import com.kedom.dao.UserDao;
+import com.kedom.myJavaUtils.NFTProUtils;
 import com.kedom.service.UserService;
 import org.springframework.stereotype.Service;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
+import java.util.List;
+import java.util.ArrayList;
 
 import javax.annotation.Resource;
 
@@ -14,7 +17,7 @@ import javax.annotation.Resource;
  * (User)表服务实现类
  *
  * @author makejava
- * @since 2022-10-18 17:46:27
+ * @since 2022-10-18 23:12:54
  */
 @Service("userService")
 public class UserServiceImpl implements UserService {
@@ -29,7 +32,8 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public User queryById(String userId) {
-        return this.userDao.queryById(userId);
+       this.userDao.queryById(userId);
+     return null;
     }
 
     /**
@@ -40,9 +44,9 @@ public class UserServiceImpl implements UserService {
      * @return 查询结果
      */
     @Override
-    public Page<User> queryByPage(User user, PageRequest pageRequest) {
+    public List<User> queryByPage(User user, PageRequest pageRequest) {
         long total = this.userDao.count(user);
-        return new PageImpl<>(this.userDao.queryAllByLimit(user, pageRequest), pageRequest, total);
+     return null;
     }
 
     /**
@@ -52,9 +56,12 @@ public class UserServiceImpl implements UserService {
      * @return 实例对象
      */
     @Override
-    public User insert(User user) {
-        this.userDao.insert(user);
-        return user;
+    public Integer insert(User user) {
+
+        user.setUserId(User.createId());
+        user.setPassword(NFTProUtils.getMd5(user.getPassword()));
+
+        return this.userDao.insert(user);
     }
 
     /**
@@ -64,9 +71,9 @@ public class UserServiceImpl implements UserService {
      * @return 实例对象
      */
     @Override
-    public User update(User user) {
+    public Integer update(User user) {
         this.userDao.update(user);
-        return this.queryById(user.getUserId());
+     return null;
     }
 
     /**
@@ -76,7 +83,8 @@ public class UserServiceImpl implements UserService {
      * @return 是否成功
      */
     @Override
-    public boolean deleteById(String userId) {
-        return this.userDao.deleteById(userId) > 0;
+    public Integer deleteById(String userId) {
+         this.userDao.deleteById(userId);
+     return null;
     }
 }

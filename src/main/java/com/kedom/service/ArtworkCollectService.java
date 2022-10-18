@@ -3,12 +3,13 @@ package com.kedom.service;
 import com.kedom.entity.ArtworkCollect;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import java.util.List;
 
 /**
  * 艺术品收集表(ArtworkCollect)表服务接口
  *
  * @author makejava
- * @since 2022-10-18 17:45:56
+ * @since 2022-10-18 23:12:54
  */
 public interface ArtworkCollectService {
 
@@ -27,7 +28,7 @@ public interface ArtworkCollectService {
      * @param pageRequest      分页对象
      * @return 查询结果
      */
-    Page<ArtworkCollect> queryByPage(ArtworkCollect artworkCollect, PageRequest pageRequest);
+    List<ArtworkCollect> queryByPage(ArtworkCollect artworkCollect, PageRequest pageRequest);
 
     /**
      * 新增数据
@@ -35,7 +36,7 @@ public interface ArtworkCollectService {
      * @param artworkCollect 实例对象
      * @return 实例对象
      */
-    ArtworkCollect insert(ArtworkCollect artworkCollect);
+    Integer insert(ArtworkCollect artworkCollect);
 
     /**
      * 修改数据
@@ -43,7 +44,7 @@ public interface ArtworkCollectService {
      * @param artworkCollect 实例对象
      * @return 实例对象
      */
-    ArtworkCollect update(ArtworkCollect artworkCollect);
+    Integer update(ArtworkCollect artworkCollect);
 
     /**
      * 通过主键删除数据
@@ -51,6 +52,6 @@ public interface ArtworkCollectService {
      * @param artworkCollectId 主键
      * @return 是否成功
      */
-    boolean deleteById(String artworkCollectId);
+    Integer deleteById(String artworkCollectId);
 
 }

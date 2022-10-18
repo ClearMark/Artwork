@@ -95,26 +95,27 @@
     </select>
 
     <!--新增所有列-->
-    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
-        insert into admin_list(username, password, admin_level, worker_id, begin_date, end_date, register_id, admin_state)
-        values (#{username}, #{password}, #{adminLevel}, #{workerId}, #{beginDate}, #{endDate}, #{registerId}, #{adminState})
+    <insert id="insert" >
+        insert into admin_list(id, username, password, admin_level, worker_id, begin_date, end_date, register_id, admin_state)
+        values (#{id}, #{username}, #{password}, #{adminLevel}, #{workerId}, #{beginDate}, #{endDate}, #{registerId}, #{adminState})
     </insert>
 
-    <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true">
-        insert into admin_list(username, password, admin_level, worker_id, begin_date, end_date, register_id, admin_state)
+    <insert id="insertBatch">
+        insert into admin_list(id, username, password, admin_level, worker_id, begin_date, end_date, register_id, admin_state)
         values
         <foreach collection="entities" item="entity" separator=",">
-        (#{entity.username}, #{entity.password}, #{entity.adminLevel}, #{entity.workerId}, #{entity.beginDate}, #{entity.endDate}, #{entity.registerId}, #{entity.adminState})
+        (#{entity.id}, #{entity.username}, #{entity.password}, #{entity.adminLevel}, #{entity.workerId}, #{entity.beginDate}, #{entity.endDate}, #{entity.registerId}, #{entity.adminState})
         </foreach>
     </insert>
 
-    <insert id="insertOrUpdateBatch" keyProperty="id" useGeneratedKeys="true">
+    <insert id="insertOrUpdateBatch">
         insert into admin_list(username, password, admin_level, worker_id, begin_date, end_date, register_id, admin_state)
         values
         <foreach collection="entities" item="entity" separator=",">
-            (#{entity.username}, #{entity.password}, #{entity.adminLevel}, #{entity.workerId}, #{entity.beginDate}, #{entity.endDate}, #{entity.registerId}, #{entity.adminState})
+            (#{entity.id}, #{entity.username}, #{entity.password}, #{entity.adminLevel}, #{entity.workerId}, #{entity.beginDate}, #{entity.endDate}, #{entity.registerId}, #{entity.adminState})
         </foreach>
         on duplicate key update
+        id = values(id),
         username = values(username),
         password = values(password),
         admin_level = values(admin_level),
