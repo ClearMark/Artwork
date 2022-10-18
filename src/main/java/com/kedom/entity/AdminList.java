@@ -7,10 +7,10 @@ import java.io.Serializable;
  * 管理员表(AdminList)实体类
  *
  * @author makejava
- * @since 2022-10-17 18:33:19
+ * @since 2022-10-18 17:45:50
  */
 public class AdminList implements Serializable {
-    private static final long serialVersionUID = -34527742696697452L;
+    private static final long serialVersionUID = 350886042296312486L;
     /**
      * 无业务作用 主键
      */

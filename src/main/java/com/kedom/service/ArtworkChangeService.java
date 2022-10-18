@@ -8,17 +8,17 @@ import org.springframework.data.domain.PageRequest;
  * 艺术品的获取去出售记录(ArtworkChange)表服务接口
  *
  * @author makejava
- * @since 2022-10-17 18:54:07
+ * @since 2022-10-18 17:45:53
  */
 public interface ArtworkChangeService {
 
     /**
      * 通过ID查询单条数据
      *
-     * @param id 主键
+     * @param artworkChangeId 主键
      * @return 实例对象
      */
-    ArtworkChange queryById(Integer id);
+    ArtworkChange queryById(String artworkChangeId);
 
     /**
      * 分页查询
@@ -48,9 +48,9 @@ public interface ArtworkChangeService {
     /**
      * 通过主键删除数据
      *
-     * @param id 主键
+     * @param artworkChangeId 主键
      * @return 是否成功
      */
-    boolean deleteById(Integer id);
+    boolean deleteById(String artworkChangeId);
 
 }

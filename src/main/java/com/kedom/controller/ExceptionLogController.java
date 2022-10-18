@@ -13,7 +13,7 @@ import javax.annotation.Resource;
  * (ExceptionLog)表控制层
  *
  * @author makejava
- * @since 2022-10-17 18:34:03
+ * @since 2022-10-18 17:46:01
  */
 @RestController
 @RequestMapping("exceptionLog")
@@ -79,5 +79,6 @@ public class ExceptionLogController {
     public ResponseEntity<Boolean> deleteById(Integer id) {
         return ResponseEntity.ok(this.exceptionLogService.deleteById(id));
     }
+
 }
 

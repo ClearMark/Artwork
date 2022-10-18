@@ -1,31 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.kedom.dao.UserinfoOnlyDao">
+<mapper namespace="com.kedom.dao.UserDao">
 
-    <resultMap type="com.kedom.entity.UserinfoOnly" id="UserinfoOnlyMap">
+    <resultMap type="com.kedom.entity.User" id="UserMap">
+        <result property="userId" column="user_id" jdbcType="VARCHAR"/>
         <result property="username" column="username" jdbcType="VARCHAR"/>
         <result property="password" column="password" jdbcType="VARCHAR"/>
         <result property="phone" column="phone" jdbcType="VARCHAR"/>
         <result property="email" column="email" jdbcType="VARCHAR"/>
         <result property="idCard" column="Id_card" jdbcType="VARCHAR"/>
-        <result property="id" column="id" jdbcType="INTEGER"/>
         <result property="userState" column="user_state" jdbcType="INTEGER"/>
     </resultMap>
 
     <!--查询单个-->
-    <select id="queryById" resultMap="UserinfoOnlyMap">
+    <select id="queryById" resultMap="UserMap">
         select
-          username, password, phone, email, Id_card, id, user_state
-        from userinfo_only
-        where id = #{id}
+          user_id, username, password, phone, email, Id_card, user_state
+        from user
+        where user_id = #{userId}
     </select>
 
     <!--查询指定行数据-->
-    <select id="queryAllByLimit" resultMap="UserinfoOnlyMap">
+    <select id="queryAllByLimit" resultMap="UserMap">
         select
-          username, password, phone, email, Id_card, id, user_state
-        from userinfo_only
+          user_id, username, password, phone, email, Id_card, user_state
+        from user
         <where>
+            <if test="userId != null and userId != ''">
+                and user_id = #{userId}
+            </if>
             <if test="username != null and username != ''">
                 and username = #{username}
             </if>
@@ -40,9 +43,6 @@
             </if>
             <if test="idCard != null and idCard != ''">
                 and Id_card = #{idCard}
-            </if>
-            <if test="id != null">
-                and id = #{id}
             </if>
             <if test="userState != null">
                 and user_state = #{userState}
@@ -54,8 +54,11 @@
     <!--统计总行数-->
     <select id="count" resultType="java.lang.Long">
         select count(1)
-        from userinfo_only
+        from user
         <where>
+            <if test="userId != null and userId != ''">
+                and user_id = #{userId}
+            </if>
             <if test="username != null and username != ''">
                 and username = #{username}
             </if>
@@ -71,9 +74,6 @@
             <if test="idCard != null and idCard != ''">
                 and Id_card = #{idCard}
             </if>
-            <if test="id != null">
-                and id = #{id}
-            </if>
             <if test="userState != null">
                 and user_state = #{userState}
             </if>
@@ -81,21 +81,21 @@
     </select>
 
     <!--新增所有列-->
-    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
-        insert into userinfo_only(username, password, phone, email, Id_card, user_state)
+    <insert id="insert" keyProperty="userId" useGeneratedKeys="true">
+        insert into user(username, password, phone, email, Id_card, user_state)
         values (#{username}, #{password}, #{phone}, #{email}, #{idCard}, #{userState})
     </insert>
 
-    <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true">
-        insert into userinfo_only(username, password, phone, email, Id_card, user_state)
+    <insert id="insertBatch" keyProperty="userId" useGeneratedKeys="true">
+        insert into user(username, password, phone, email, Id_card, user_state)
         values
         <foreach collection="entities" item="entity" separator=",">
         (#{entity.username}, #{entity.password}, #{entity.phone}, #{entity.email}, #{entity.idCard}, #{entity.userState})
         </foreach>
     </insert>
 
-    <insert id="insertOrUpdateBatch" keyProperty="id" useGeneratedKeys="true">
-        insert into userinfo_only(username, password, phone, email, Id_card, user_state)
+    <insert id="insertOrUpdateBatch" keyProperty="userId" useGeneratedKeys="true">
+        insert into user(username, password, phone, email, Id_card, user_state)
         values
         <foreach collection="entities" item="entity" separator=",">
             (#{entity.username}, #{entity.password}, #{entity.phone}, #{entity.email}, #{entity.idCard}, #{entity.userState})
@@ -111,7 +111,7 @@
 
     <!--通过主键修改数据-->
     <update id="update">
-        update userinfo_only
+        update user
         <set>
             <if test="username != null and username != ''">
                 username = #{username},
@@ -132,12 +132,12 @@
                 user_state = #{userState},
             </if>
         </set>
-        where id = #{id}
+        where user_id = #{userId}
     </update>
 
     <!--通过主键删除-->
     <delete id="deleteById">
-        delete from userinfo_only where id = #{id}
+        delete from user where user_id = #{userId}
     </delete>
 
 </mapper>

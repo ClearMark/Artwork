@@ -8,7 +8,7 @@ import org.springframework.data.domain.PageRequest;
  * 管理员表(AdminList)表服务接口
  *
  * @author makejava
- * @since 2022-10-17 18:33:21
+ * @since 2022-10-18 17:45:51
  */
 public interface AdminListService {
 

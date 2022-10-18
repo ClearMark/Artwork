@@ -8,17 +8,17 @@ import org.springframework.data.domain.PageRequest;
  * 艺术品发布表(ArtworkRelease)表服务接口
  *
  * @author makejava
- * @since 2022-10-17 19:02:11
+ * @since 2022-10-18 17:46:01
  */
 public interface ArtworkReleaseService {
 
     /**
      * 通过ID查询单条数据
      *
-     * @param id 主键
+     * @param artworkReleaseId 主键
      * @return 实例对象
      */
-    ArtworkRelease queryById(Integer id);
+    ArtworkRelease queryById(String artworkReleaseId);
 
     /**
      * 分页查询
@@ -48,9 +48,9 @@ public interface ArtworkReleaseService {
     /**
      * 通过主键删除数据
      *
-     * @param id 主键
+     * @param artworkReleaseId 主键
      * @return 是否成功
      */
-    boolean deleteById(Integer id);
+    boolean deleteById(String artworkReleaseId);
 
 }

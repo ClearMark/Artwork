@@ -8,7 +8,7 @@ import org.springframework.data.domain.PageRequest;
  * 艺术品目录(ArtworkList)表服务接口
  *
  * @author makejava
- * @since 2022-10-17 18:33:29
+ * @since 2022-10-18 17:46:00
  */
 public interface ArtworkListService {
 

@@ -5,12 +5,12 @@
     <resultMap type="com.kedom.entity.ArtworkExamine" id="ArtworkExamineMap">
         <result property="artworkId" column="artwork_id" jdbcType="VARCHAR"/>
         <result property="artworkName" column="artwork_name" jdbcType="VARCHAR"/>
-        <result property="artworkReleaseDate" column="artwork_release_date" jdbcType="TIMESTAMP"/>
         <result property="releaseCount" column="release_count" jdbcType="INTEGER"/>
         <result property="releaseUsername" column="release_username" jdbcType="VARCHAR"/>
         <result property="artworkOrigin" column="artwork_origin" jdbcType="VARCHAR"/>
         <result property="artworkImgAddress" column="artwork_img_address" jdbcType="VARCHAR"/>
         <result property="artworkLevel" column="artwork_level" jdbcType="INTEGER"/>
+        <result property="artworkReleaseDate" column="artwork_release_date" jdbcType="TIMESTAMP"/>
         <result property="artworkCollectCode" column="artwork_collect_code" jdbcType="VARCHAR"/>
         <result property="examineAdminId" column="examine_admin_id" jdbcType="INTEGER"/>
         <result property="examineDate" column="examine_date" jdbcType="TIMESTAMP"/>
@@ -20,7 +20,7 @@
     <!--查询单个-->
     <select id="queryById" resultMap="ArtworkExamineMap">
         select
-          artwork_id, artwork_name, artwork_release_date, release_count, release_username, artwork_origin, artwork_img_address, artwork_level, artwork_collect_code, examine_admin_id, examine_date, examine_state
+          artwork_id, artwork_name, release_count, release_username, artwork_origin, artwork_img_address, artwork_level, artwork_release_date, artwork_collect_code, examine_admin_id, examine_date, examine_state
         from artwork_examine
         where artwork_id = #{artworkId}
     </select>
@@ -28,7 +28,7 @@
     <!--查询指定行数据-->
     <select id="queryAllByLimit" resultMap="ArtworkExamineMap">
         select
-          artwork_id, artwork_name, artwork_release_date, release_count, release_username, artwork_origin, artwork_img_address, artwork_level, artwork_collect_code, examine_admin_id, examine_date, examine_state
+          artwork_id, artwork_name, release_count, release_username, artwork_origin, artwork_img_address, artwork_level, artwork_release_date, artwork_collect_code, examine_admin_id, examine_date, examine_state
         from artwork_examine
         <where>
             <if test="artworkId != null and artworkId != ''">
@@ -36,9 +36,6 @@
             </if>
             <if test="artworkName != null and artworkName != ''">
                 and artwork_name = #{artworkName}
-            </if>
-            <if test="artworkReleaseDate != null">
-                and artwork_release_date = #{artworkReleaseDate}
             </if>
             <if test="releaseCount != null">
                 and release_count = #{releaseCount}
@@ -54,6 +51,9 @@
             </if>
             <if test="artworkLevel != null">
                 and artwork_level = #{artworkLevel}
+            </if>
+            <if test="artworkReleaseDate != null">
+                and artwork_release_date = #{artworkReleaseDate}
             </if>
             <if test="artworkCollectCode != null and artworkCollectCode != ''">
                 and artwork_collect_code = #{artworkCollectCode}
@@ -82,9 +82,6 @@
             <if test="artworkName != null and artworkName != ''">
                 and artwork_name = #{artworkName}
             </if>
-            <if test="artworkReleaseDate != null">
-                and artwork_release_date = #{artworkReleaseDate}
-            </if>
             <if test="releaseCount != null">
                 and release_count = #{releaseCount}
             </if>
@@ -99,6 +96,9 @@
             </if>
             <if test="artworkLevel != null">
                 and artwork_level = #{artworkLevel}
+            </if>
+            <if test="artworkReleaseDate != null">
+                and artwork_release_date = #{artworkReleaseDate}
             </if>
             <if test="artworkCollectCode != null and artworkCollectCode != ''">
                 and artwork_collect_code = #{artworkCollectCode}
@@ -117,32 +117,32 @@
 
     <!--新增所有列-->
     <insert id="insert" keyProperty="artworkId" useGeneratedKeys="true">
-        insert into artwork_examine(artwork_name, artwork_release_date, release_count, release_username, artwork_origin, artwork_img_address, artwork_level, artwork_collect_code, examine_admin_id, examine_date, examine_state)
-        values (#{artworkName}, #{artworkReleaseDate}, #{releaseCount}, #{releaseUsername}, #{artworkOrigin}, #{artworkImgAddress}, #{artworkLevel}, #{artworkCollectCode}, #{examineAdminId}, #{examineDate}, #{examineState})
+        insert into artwork_examine(artwork_name, release_count, release_username, artwork_origin, artwork_img_address, artwork_level, artwork_release_date, artwork_collect_code, examine_admin_id, examine_date, examine_state)
+        values (#{artworkName}, #{releaseCount}, #{releaseUsername}, #{artworkOrigin}, #{artworkImgAddress}, #{artworkLevel}, #{artworkReleaseDate}, #{artworkCollectCode}, #{examineAdminId}, #{examineDate}, #{examineState})
     </insert>
 
     <insert id="insertBatch" keyProperty="artworkId" useGeneratedKeys="true">
-        insert into artwork_examine(artwork_name, artwork_release_date, release_count, release_username, artwork_origin, artwork_img_address, artwork_level, artwork_collect_code, examine_admin_id, examine_date, examine_state)
+        insert into artwork_examine(artwork_name, release_count, release_username, artwork_origin, artwork_img_address, artwork_level, artwork_release_date, artwork_collect_code, examine_admin_id, examine_date, examine_state)
         values
         <foreach collection="entities" item="entity" separator=",">
-        (#{entity.artworkName}, #{entity.artworkReleaseDate}, #{entity.releaseCount}, #{entity.releaseUsername}, #{entity.artworkOrigin}, #{entity.artworkImgAddress}, #{entity.artworkLevel}, #{entity.artworkCollectCode}, #{entity.examineAdminId}, #{entity.examineDate}, #{entity.examineState})
+        (#{entity.artworkName}, #{entity.releaseCount}, #{entity.releaseUsername}, #{entity.artworkOrigin}, #{entity.artworkImgAddress}, #{entity.artworkLevel}, #{entity.artworkReleaseDate}, #{entity.artworkCollectCode}, #{entity.examineAdminId}, #{entity.examineDate}, #{entity.examineState})
         </foreach>
     </insert>
 
     <insert id="insertOrUpdateBatch" keyProperty="artworkId" useGeneratedKeys="true">
-        insert into artwork_examine(artwork_name, artwork_release_date, release_count, release_username, artwork_origin, artwork_img_address, artwork_level, artwork_collect_code, examine_admin_id, examine_date, examine_state)
+        insert into artwork_examine(artwork_name, release_count, release_username, artwork_origin, artwork_img_address, artwork_level, artwork_release_date, artwork_collect_code, examine_admin_id, examine_date, examine_state)
         values
         <foreach collection="entities" item="entity" separator=",">
-            (#{entity.artworkName}, #{entity.artworkReleaseDate}, #{entity.releaseCount}, #{entity.releaseUsername}, #{entity.artworkOrigin}, #{entity.artworkImgAddress}, #{entity.artworkLevel}, #{entity.artworkCollectCode}, #{entity.examineAdminId}, #{entity.examineDate}, #{entity.examineState})
+            (#{entity.artworkName}, #{entity.releaseCount}, #{entity.releaseUsername}, #{entity.artworkOrigin}, #{entity.artworkImgAddress}, #{entity.artworkLevel}, #{entity.artworkReleaseDate}, #{entity.artworkCollectCode}, #{entity.examineAdminId}, #{entity.examineDate}, #{entity.examineState})
         </foreach>
         on duplicate key update
         artwork_name = values(artwork_name),
-        artwork_release_date = values(artwork_release_date),
         release_count = values(release_count),
         release_username = values(release_username),
         artwork_origin = values(artwork_origin),
         artwork_img_address = values(artwork_img_address),
         artwork_level = values(artwork_level),
+        artwork_release_date = values(artwork_release_date),
         artwork_collect_code = values(artwork_collect_code),
         examine_admin_id = values(examine_admin_id),
         examine_date = values(examine_date),
@@ -155,9 +155,6 @@
         <set>
             <if test="artworkName != null and artworkName != ''">
                 artwork_name = #{artworkName},
-            </if>
-            <if test="artworkReleaseDate != null">
-                artwork_release_date = #{artworkReleaseDate},
             </if>
             <if test="releaseCount != null">
                 release_count = #{releaseCount},
@@ -173,6 +170,9 @@
             </if>
             <if test="artworkLevel != null">
                 artwork_level = #{artworkLevel},
+            </if>
+            <if test="artworkReleaseDate != null">
+                artwork_release_date = #{artworkReleaseDate},
             </if>
             <if test="artworkCollectCode != null and artworkCollectCode != ''">
                 artwork_collect_code = #{artworkCollectCode},

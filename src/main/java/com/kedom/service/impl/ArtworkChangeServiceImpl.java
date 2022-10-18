@@ -14,7 +14,7 @@ import javax.annotation.Resource;
  * 艺术品的获取去出售记录(ArtworkChange)表服务实现类
  *
  * @author makejava
- * @since 2022-10-17 18:54:07
+ * @since 2022-10-18 17:45:54
  */
 @Service("artworkChangeService")
 public class ArtworkChangeServiceImpl implements ArtworkChangeService {
@@ -24,12 +24,12 @@ public class ArtworkChangeServiceImpl implements ArtworkChangeService {
     /**
      * 通过ID查询单条数据
      *
-     * @param id 主键
+     * @param artworkChangeId 主键
      * @return 实例对象
      */
     @Override
-    public ArtworkChange queryById(Integer id) {
-        return this.artworkChangeDao.queryById(id);
+    public ArtworkChange queryById(String artworkChangeId) {
+        return this.artworkChangeDao.queryById(artworkChangeId);
     }
 
     /**
@@ -66,17 +66,17 @@ public class ArtworkChangeServiceImpl implements ArtworkChangeService {
     @Override
     public ArtworkChange update(ArtworkChange artworkChange) {
         this.artworkChangeDao.update(artworkChange);
-        return this.queryById(artworkChange.getId());
+        return this.queryById(artworkChange.getArtworkChangeId());
     }
 
     /**
      * 通过主键删除数据
      *
-     * @param id 主键
+     * @param artworkChangeId 主键
      * @return 是否成功
      */
     @Override
-    public boolean deleteById(Integer id) {
-        return this.artworkChangeDao.deleteById(id) > 0;
+    public boolean deleteById(String artworkChangeId) {
+        return this.artworkChangeDao.deleteById(artworkChangeId) > 0;
     }
 }

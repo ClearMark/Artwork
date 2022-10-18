@@ -3,18 +3,18 @@
 <mapper namespace="com.kedom.dao.ExceptionLogDao">
 
     <resultMap type="com.kedom.entity.ExceptionLog" id="ExceptionLogMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
         <result property="exceptionUrl" column="exception_url" jdbcType="VARCHAR"/>
         <result property="exceptionClassName" column="exception_class_name" jdbcType="VARCHAR"/>
         <result property="exceptionMethodName" column="exception_method_name" jdbcType="VARCHAR"/>
         <result property="exceptionMessage" column="exception_message" jdbcType="VARCHAR"/>
         <result property="exceptionTime" column="exception_time" jdbcType="TIMESTAMP"/>
-        <result property="id" column="id" jdbcType="INTEGER"/>
     </resultMap>
 
     <!--查询单个-->
     <select id="queryById" resultMap="ExceptionLogMap">
         select
-          exception_url, exception_class_name, exception_method_name, exception_message, exception_time, id
+          id, exception_url, exception_class_name, exception_method_name, exception_message, exception_time
         from exception_log
         where id = #{id}
     </select>
@@ -22,9 +22,12 @@
     <!--查询指定行数据-->
     <select id="queryAllByLimit" resultMap="ExceptionLogMap">
         select
-          exception_url, exception_class_name, exception_method_name, exception_message, exception_time, id
+          id, exception_url, exception_class_name, exception_method_name, exception_message, exception_time
         from exception_log
         <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
             <if test="exceptionUrl != null and exceptionUrl != ''">
                 and exception_url = #{exceptionUrl}
             </if>
@@ -39,9 +42,6 @@
             </if>
             <if test="exceptionTime != null">
                 and exception_time = #{exceptionTime}
-            </if>
-            <if test="id != null">
-                and id = #{id}
             </if>
         </where>
         limit #{pageable.offset}, #{pageable.pageSize}
@@ -52,6 +52,9 @@
         select count(1)
         from exception_log
         <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
             <if test="exceptionUrl != null and exceptionUrl != ''">
                 and exception_url = #{exceptionUrl}
             </if>
@@ -66,9 +69,6 @@
             </if>
             <if test="exceptionTime != null">
                 and exception_time = #{exceptionTime}
-            </if>
-            <if test="id != null">
-                and id = #{id}
             </if>
         </where>
     </select>

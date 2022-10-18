@@ -13,7 +13,7 @@ import javax.annotation.Resource;
  * 艺术品目录(ArtworkList)表控制层
  *
  * @author makejava
- * @since 2022-10-17 18:33:28
+ * @since 2022-10-18 17:45:59
  */
 @RestController
 @RequestMapping("artworkList")

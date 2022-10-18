@@ -7,14 +7,14 @@ import java.io.Serializable;
  * 艺术品的获取去出售记录(ArtworkChange)实体类
  *
  * @author makejava
- * @since 2022-10-17 18:54:07
+ * @since 2022-10-18 17:45:53
  */
 public class ArtworkChange implements Serializable {
-    private static final long serialVersionUID = 681798638194448760L;
+    private static final long serialVersionUID = 282145869996788535L;
     /**
      * 主键 无业务作用
      */
-    private Integer id;
+    private String artworkChangeId;
     /**
      * 艺术品id
      */
@@ -22,7 +22,7 @@ public class ArtworkChange implements Serializable {
     /**
      * 用户名
      */
-    private String username;
+    private String userId;
     /**
      * 艺术品数量变化
      */
@@ -35,12 +35,12 @@ public class ArtworkChange implements Serializable {
     private Integer changeMode;
 
 
-    public Integer getId() {
-        return id;
+    public String getArtworkChangeId() {
+        return artworkChangeId;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setArtworkChangeId(String artworkChangeId) {
+        this.artworkChangeId = artworkChangeId;
     }
 
     public String getArtworkId() {
@@ -51,12 +51,12 @@ public class ArtworkChange implements Serializable {
         this.artworkId = artworkId;
     }
 
-    public String getUsername() {
-        return username;
+    public String getUserId() {
+        return userId;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
     public Integer getArtworkCountChange() {

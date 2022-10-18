@@ -1,7 +1,6 @@
 package com.kedom.dao;
 
 import com.kedom.entity.ArtworkRelease;
-import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.data.domain.Pageable;
 import java.util.List;
@@ -10,18 +9,17 @@ import java.util.List;
  * 艺术品发布表(ArtworkRelease)表数据库访问层
  *
  * @author makejava
- * @since 2022-10-17 19:02:10
+ * @since 2022-10-18 17:46:00
  */
-@Mapper
 public interface ArtworkReleaseDao {
 
     /**
      * 通过ID查询单条数据
      *
-     * @param id 主键
+     * @param artworkReleaseId 主键
      * @return 实例对象
      */
-    ArtworkRelease queryById(Integer id);
+    ArtworkRelease queryById(String artworkReleaseId);
 
     /**
      * 查询指定行数据
@@ -76,10 +74,10 @@ public interface ArtworkReleaseDao {
     /**
      * 通过主键删除数据
      *
-     * @param id 主键
+     * @param artworkReleaseId 主键
      * @return 影响行数
      */
-    int deleteById(Integer id);
+    int deleteById(String artworkReleaseId);
 
 }
 

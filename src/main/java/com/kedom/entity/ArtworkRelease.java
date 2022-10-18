@@ -7,14 +7,14 @@ import java.io.Serializable;
  * 艺术品发布表(ArtworkRelease)实体类
  *
  * @author makejava
- * @since 2022-10-17 19:02:10
+ * @since 2022-10-18 17:46:00
  */
 public class ArtworkRelease implements Serializable {
-    private static final long serialVersionUID = 236457032926437462L;
+    private static final long serialVersionUID = 115540249591747178L;
     /**
      * 主键 无业务意义
      */
-    private Integer id;
+    private String artworkReleaseId;
     /**
      * 艺术品编号
      */
@@ -30,7 +30,7 @@ public class ArtworkRelease implements Serializable {
     /**
      * 艺术品发布人
      */
-    private String artworkReleaseUsername;
+    private String artworkReleaseUserId;
     /**
      * 剩下多少艺术品
      */
@@ -49,12 +49,12 @@ public class ArtworkRelease implements Serializable {
     private Integer releaseState;
 
 
-    public Integer getId() {
-        return id;
+    public String getArtworkReleaseId() {
+        return artworkReleaseId;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setArtworkReleaseId(String artworkReleaseId) {
+        this.artworkReleaseId = artworkReleaseId;
     }
 
     public String getArtworkId() {
@@ -81,12 +81,12 @@ public class ArtworkRelease implements Serializable {
         this.artworkCollectCode = artworkCollectCode;
     }
 
-    public String getArtworkReleaseUsername() {
-        return artworkReleaseUsername;
+    public String getArtworkReleaseUserId() {
+        return artworkReleaseUserId;
     }
 
-    public void setArtworkReleaseUsername(String artworkReleaseUsername) {
-        this.artworkReleaseUsername = artworkReleaseUsername;
+    public void setArtworkReleaseUserId(String artworkReleaseUserId) {
+        this.artworkReleaseUserId = artworkReleaseUserId;
     }
 
     public Integer getSurplusCount() {

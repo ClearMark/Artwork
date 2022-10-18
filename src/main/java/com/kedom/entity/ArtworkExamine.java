@@ -7,10 +7,10 @@ import java.io.Serializable;
  * 艺术品审批表(ArtworkExamine)实体类
  *
  * @author makejava
- * @since 2022-10-17 18:33:27
+ * @since 2022-10-18 17:45:57
  */
 public class ArtworkExamine implements Serializable {
-    private static final long serialVersionUID = 781610501613391964L;
+    private static final long serialVersionUID = 769152199207779971L;
     /**
      * 艺术品编号
      */
@@ -19,10 +19,6 @@ public class ArtworkExamine implements Serializable {
      * 艺术品名称
      */
     private String artworkName;
-    /**
-     * 艺术品发布时间
-     */
-    private Date artworkReleaseDate;
     /**
      * 发布数量
      */
@@ -43,6 +39,10 @@ public class ArtworkExamine implements Serializable {
      * 艺术品等级
      */
     private Integer artworkLevel;
+    /**
+     * 艺术品发布时间
+     */
+    private Date artworkReleaseDate;
     /**
      * 收集代码
      */
@@ -75,14 +75,6 @@ public class ArtworkExamine implements Serializable {
 
     public void setArtworkName(String artworkName) {
         this.artworkName = artworkName;
-    }
-
-    public Date getArtworkReleaseDate() {
-        return artworkReleaseDate;
-    }
-
-    public void setArtworkReleaseDate(Date artworkReleaseDate) {
-        this.artworkReleaseDate = artworkReleaseDate;
     }
 
     public Integer getReleaseCount() {
@@ -123,6 +115,14 @@ public class ArtworkExamine implements Serializable {
 
     public void setArtworkLevel(Integer artworkLevel) {
         this.artworkLevel = artworkLevel;
+    }
+
+    public Date getArtworkReleaseDate() {
+        return artworkReleaseDate;
+    }
+
+    public void setArtworkReleaseDate(Date artworkReleaseDate) {
+        this.artworkReleaseDate = artworkReleaseDate;
     }
 
     public String getArtworkCollectCode() {

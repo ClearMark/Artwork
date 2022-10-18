@@ -1,6 +1,5 @@
 package com.kedom.entity;
 
-import java.time.LocalDateTime;
 import java.util.Date;
 import java.io.Serializable;
 
@@ -8,10 +7,14 @@ import java.io.Serializable;
  * (ExceptionLog)实体类
  *
  * @author makejava
- * @since 2022-10-17 18:34:04
+ * @since 2022-10-18 17:46:02
  */
 public class ExceptionLog implements Serializable {
-    private static final long serialVersionUID = 461330697970933666L;
+    private static final long serialVersionUID = 881297375026920899L;
+    /**
+     * 主键 无作用
+     */
+    private Integer id;
     /**
      * 异常接口
      */
@@ -31,20 +34,16 @@ public class ExceptionLog implements Serializable {
     /**
      * 异常时间
      */
-    private LocalDateTime exceptionTime;
-    /**
-     * 主键 无作用
-     */
-    private Integer id;
+    private Date exceptionTime;
 
-    public ExceptionLog(String exceptionUrl, String exceptionClassName, String exceptionMethodName, String exceptionMessage, LocalDateTime exceptionTime) {
-        this.exceptionUrl = exceptionUrl;
-        this.exceptionClassName = exceptionClassName;
-        this.exceptionMethodName = exceptionMethodName;
-        this.exceptionMessage = exceptionMessage;
-        this.exceptionTime = exceptionTime;
+
+    public Integer getId() {
+        return id;
     }
 
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public String getExceptionUrl() {
         return exceptionUrl;
@@ -78,20 +77,12 @@ public class ExceptionLog implements Serializable {
         this.exceptionMessage = exceptionMessage;
     }
 
-    public LocalDateTime getExceptionTime() {
+    public Date getExceptionTime() {
         return exceptionTime;
     }
 
-    public void setExceptionTime(LocalDateTime exceptionTime) {
+    public void setExceptionTime(Date exceptionTime) {
         this.exceptionTime = exceptionTime;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
     }
 
 }

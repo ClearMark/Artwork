@@ -13,7 +13,7 @@ import javax.annotation.Resource;
  * 艺术品的获取去出售记录(ArtworkChange)表控制层
  *
  * @author makejava
- * @since 2022-10-17 18:54:07
+ * @since 2022-10-18 17:45:52
  */
 @RestController
 @RequestMapping("artworkChange")
@@ -43,7 +43,7 @@ public class ArtworkChangeController {
      * @return 单条数据
      */
     @GetMapping("{id}")
-    public ResponseEntity<ArtworkChange> queryById(@PathVariable("id") Integer id) {
+    public ResponseEntity<ArtworkChange> queryById(@PathVariable("id") String id) {
         return ResponseEntity.ok(this.artworkChangeService.queryById(id));
     }
 
@@ -76,7 +76,7 @@ public class ArtworkChangeController {
      * @return 删除是否成功
      */
     @DeleteMapping
-    public ResponseEntity<Boolean> deleteById(Integer id) {
+    public ResponseEntity<Boolean> deleteById(String id) {
         return ResponseEntity.ok(this.artworkChangeService.deleteById(id));
     }
 

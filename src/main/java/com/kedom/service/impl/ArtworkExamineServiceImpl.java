@@ -14,7 +14,7 @@ import javax.annotation.Resource;
  * 艺术品审批表(ArtworkExamine)表服务实现类
  *
  * @author makejava
- * @since 2022-10-17 18:33:28
+ * @since 2022-10-18 17:45:58
  */
 @Service("artworkExamineService")
 public class ArtworkExamineServiceImpl implements ArtworkExamineService {

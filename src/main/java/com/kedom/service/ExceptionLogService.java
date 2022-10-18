@@ -8,7 +8,7 @@ import org.springframework.data.domain.PageRequest;
  * (ExceptionLog)表服务接口
  *
  * @author makejava
- * @since 2022-10-17 18:34:05
+ * @since 2022-10-18 17:46:02
  */
 public interface ExceptionLogService {
 

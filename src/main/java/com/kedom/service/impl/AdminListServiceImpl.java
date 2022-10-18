@@ -14,7 +14,7 @@ import javax.annotation.Resource;
  * 管理员表(AdminList)表服务实现类
  *
  * @author makejava
- * @since 2022-10-17 18:33:25
+ * @since 2022-10-18 17:45:52
  */
 @Service("adminListService")
 public class AdminListServiceImpl implements AdminListService {

@@ -3,41 +3,41 @@
 <mapper namespace="com.kedom.dao.ArtworkCollectDao">
 
     <resultMap type="com.kedom.entity.ArtworkCollect" id="ArtworkCollectMap">
-        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="artworkCollectId" column="artwork_collect_id" jdbcType="VARCHAR"/>
         <result property="artworkId" column="artwork_id" jdbcType="VARCHAR"/>
-        <result property="username" column="username" jdbcType="VARCHAR"/>
-        <result property="artworkCollectDate" column="artwork_collect_date" jdbcType="TIMESTAMP"/>
+        <result property="userId" column="user_id" jdbcType="VARCHAR"/>
         <result property="collectCode" column="collect_code" jdbcType="VARCHAR"/>
+        <result property="artworkCollectDate" column="artwork_collect_date" jdbcType="TIMESTAMP"/>
     </resultMap>
 
     <!--查询单个-->
     <select id="queryById" resultMap="ArtworkCollectMap">
         select
-          id, artwork_id, username, artwork_collect_date, collect_code
+          artwork_collect_id, artwork_id, user_id, collect_code, artwork_collect_date
         from artwork_collect
-        where id = #{id}
+        where artwork_collect_id = #{artworkCollectId}
     </select>
 
     <!--查询指定行数据-->
     <select id="queryAllByLimit" resultMap="ArtworkCollectMap">
         select
-          id, artwork_id, username, artwork_collect_date, collect_code
+          artwork_collect_id, artwork_id, user_id, collect_code, artwork_collect_date
         from artwork_collect
         <where>
-            <if test="id != null">
-                and id = #{id}
+            <if test="artworkCollectId != null and artworkCollectId != ''">
+                and artwork_collect_id = #{artworkCollectId}
             </if>
             <if test="artworkId != null and artworkId != ''">
                 and artwork_id = #{artworkId}
             </if>
-            <if test="username != null and username != ''">
-                and username = #{username}
-            </if>
-            <if test="artworkCollectDate != null">
-                and artwork_collect_date = #{artworkCollectDate}
+            <if test="userId != null and userId != ''">
+                and user_id = #{userId}
             </if>
             <if test="collectCode != null and collectCode != ''">
                 and collect_code = #{collectCode}
+            </if>
+            <if test="artworkCollectDate != null">
+                and artwork_collect_date = #{artworkCollectDate}
             </if>
         </where>
         limit #{pageable.offset}, #{pageable.pageSize}
@@ -48,49 +48,49 @@
         select count(1)
         from artwork_collect
         <where>
-            <if test="id != null">
-                and id = #{id}
+            <if test="artworkCollectId != null and artworkCollectId != ''">
+                and artwork_collect_id = #{artworkCollectId}
             </if>
             <if test="artworkId != null and artworkId != ''">
                 and artwork_id = #{artworkId}
             </if>
-            <if test="username != null and username != ''">
-                and username = #{username}
-            </if>
-            <if test="artworkCollectDate != null">
-                and artwork_collect_date = #{artworkCollectDate}
+            <if test="userId != null and userId != ''">
+                and user_id = #{userId}
             </if>
             <if test="collectCode != null and collectCode != ''">
                 and collect_code = #{collectCode}
+            </if>
+            <if test="artworkCollectDate != null">
+                and artwork_collect_date = #{artworkCollectDate}
             </if>
         </where>
     </select>
 
     <!--新增所有列-->
-    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
-        insert into artwork_collect(artwork_id, username, artwork_collect_date, collect_code)
-        values (#{artworkId}, #{username}, #{artworkCollectDate}, #{collectCode})
+    <insert id="insert" keyProperty="artworkCollectId" useGeneratedKeys="true">
+        insert into artwork_collect(artwork_id, user_id, collect_code, artwork_collect_date)
+        values (#{artworkId}, #{userId}, #{collectCode}, #{artworkCollectDate})
     </insert>
 
-    <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true">
-        insert into artwork_collect(artwork_id, username, artwork_collect_date, collect_code)
+    <insert id="insertBatch" keyProperty="artworkCollectId" useGeneratedKeys="true">
+        insert into artwork_collect(artwork_id, user_id, collect_code, artwork_collect_date)
         values
         <foreach collection="entities" item="entity" separator=",">
-        (#{entity.artworkId}, #{entity.username}, #{entity.artworkCollectDate}, #{entity.collectCode})
+        (#{entity.artworkId}, #{entity.userId}, #{entity.collectCode}, #{entity.artworkCollectDate})
         </foreach>
     </insert>
 
-    <insert id="insertOrUpdateBatch" keyProperty="id" useGeneratedKeys="true">
-        insert into artwork_collect(artwork_id, username, artwork_collect_date, collect_code)
+    <insert id="insertOrUpdateBatch" keyProperty="artworkCollectId" useGeneratedKeys="true">
+        insert into artwork_collect(artwork_id, user_id, collect_code, artwork_collect_date)
         values
         <foreach collection="entities" item="entity" separator=",">
-            (#{entity.artworkId}, #{entity.username}, #{entity.artworkCollectDate}, #{entity.collectCode})
+            (#{entity.artworkId}, #{entity.userId}, #{entity.collectCode}, #{entity.artworkCollectDate})
         </foreach>
         on duplicate key update
         artwork_id = values(artwork_id),
-        username = values(username),
-        artwork_collect_date = values(artwork_collect_date),
-        collect_code = values(collect_code)
+        user_id = values(user_id),
+        collect_code = values(collect_code),
+        artwork_collect_date = values(artwork_collect_date)
     </insert>
 
     <!--通过主键修改数据-->
@@ -100,22 +100,22 @@
             <if test="artworkId != null and artworkId != ''">
                 artwork_id = #{artworkId},
             </if>
-            <if test="username != null and username != ''">
-                username = #{username},
-            </if>
-            <if test="artworkCollectDate != null">
-                artwork_collect_date = #{artworkCollectDate},
+            <if test="userId != null and userId != ''">
+                user_id = #{userId},
             </if>
             <if test="collectCode != null and collectCode != ''">
                 collect_code = #{collectCode},
             </if>
+            <if test="artworkCollectDate != null">
+                artwork_collect_date = #{artworkCollectDate},
+            </if>
         </set>
-        where id = #{id}
+        where artwork_collect_id = #{artworkCollectId}
     </update>
 
     <!--通过主键删除-->
     <delete id="deleteById">
-        delete from artwork_collect where id = #{id}
+        delete from artwork_collect where artwork_collect_id = #{artworkCollectId}
     </delete>
 
 </mapper>

@@ -14,7 +14,7 @@ import javax.annotation.Resource;
  * 艺术品发布表(ArtworkRelease)表服务实现类
  *
  * @author makejava
- * @since 2022-10-17 19:02:11
+ * @since 2022-10-18 17:46:01
  */
 @Service("artworkReleaseService")
 public class ArtworkReleaseServiceImpl implements ArtworkReleaseService {
@@ -24,12 +24,12 @@ public class ArtworkReleaseServiceImpl implements ArtworkReleaseService {
     /**
      * 通过ID查询单条数据
      *
-     * @param id 主键
+     * @param artworkReleaseId 主键
      * @return 实例对象
      */
     @Override
-    public ArtworkRelease queryById(Integer id) {
-        return this.artworkReleaseDao.queryById(id);
+    public ArtworkRelease queryById(String artworkReleaseId) {
+        return this.artworkReleaseDao.queryById(artworkReleaseId);
     }
 
     /**
@@ -66,17 +66,17 @@ public class ArtworkReleaseServiceImpl implements ArtworkReleaseService {
     @Override
     public ArtworkRelease update(ArtworkRelease artworkRelease) {
         this.artworkReleaseDao.update(artworkRelease);
-        return this.queryById(artworkRelease.getId());
+        return this.queryById(artworkRelease.getArtworkReleaseId());
     }
 
     /**
      * 通过主键删除数据
      *
-     * @param id 主键
+     * @param artworkReleaseId 主键
      * @return 是否成功
      */
     @Override
-    public boolean deleteById(Integer id) {
-        return this.artworkReleaseDao.deleteById(id) > 0;
+    public boolean deleteById(String artworkReleaseId) {
+        return this.artworkReleaseDao.deleteById(artworkReleaseId) > 0;
     }
 }

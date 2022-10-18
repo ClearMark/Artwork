@@ -7,10 +7,10 @@ import java.io.Serializable;
  * 艺术品目录(ArtworkList)实体类
  *
  * @author makejava
- * @since 2022-10-17 18:33:29
+ * @since 2022-10-18 17:45:59
  */
 public class ArtworkList implements Serializable {
-    private static final long serialVersionUID = 482730984011330622L;
+    private static final long serialVersionUID = -52158943021135715L;
     /**
      * 艺术品编号
      */
@@ -19,10 +19,6 @@ public class ArtworkList implements Serializable {
      * 艺术品名称
      */
     private String artworkName;
-    /**
-     * 艺术品发布时间
-     */
-    private Date artworkReleaseDate;
     /**
      * 总计发布数量
      */
@@ -43,6 +39,10 @@ public class ArtworkList implements Serializable {
      * 艺术品等级
      */
     private Integer artworkLevel;
+    /**
+     * 艺术品发布时间
+     */
+    private Date artworkReleaseDate;
 
 
     public String getArtworkId() {
@@ -59,14 +59,6 @@ public class ArtworkList implements Serializable {
 
     public void setArtworkName(String artworkName) {
         this.artworkName = artworkName;
-    }
-
-    public Date getArtworkReleaseDate() {
-        return artworkReleaseDate;
-    }
-
-    public void setArtworkReleaseDate(Date artworkReleaseDate) {
-        this.artworkReleaseDate = artworkReleaseDate;
     }
 
     public Integer getTotalCount() {
@@ -107,6 +99,14 @@ public class ArtworkList implements Serializable {
 
     public void setArtworkLevel(Integer artworkLevel) {
         this.artworkLevel = artworkLevel;
+    }
+
+    public Date getArtworkReleaseDate() {
+        return artworkReleaseDate;
+    }
+
+    public void setArtworkReleaseDate(Date artworkReleaseDate) {
+        this.artworkReleaseDate = artworkReleaseDate;
     }
 
 }

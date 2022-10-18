@@ -1,7 +1,6 @@
 package com.kedom.dao;
 
 import com.kedom.entity.ArtworkExamine;
-import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.data.domain.Pageable;
 import java.util.List;
@@ -10,9 +9,8 @@ import java.util.List;
  * 艺术品审批表(ArtworkExamine)表数据库访问层
  *
  * @author makejava
- * @since 2022-10-17 18:33:27
+ * @since 2022-10-18 17:45:57
  */
-@Mapper
 public interface ArtworkExamineDao {
 
     /**

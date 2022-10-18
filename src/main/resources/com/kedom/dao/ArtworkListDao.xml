@@ -5,18 +5,18 @@
     <resultMap type="com.kedom.entity.ArtworkList" id="ArtworkListMap">
         <result property="artworkId" column="artwork_id" jdbcType="VARCHAR"/>
         <result property="artworkName" column="artwork_name" jdbcType="VARCHAR"/>
-        <result property="artworkReleaseDate" column="artwork_release_date" jdbcType="TIMESTAMP"/>
         <result property="totalCount" column="total_count" jdbcType="INTEGER"/>
         <result property="firstReleaseUsername" column="first_release_username" jdbcType="VARCHAR"/>
         <result property="artworkOrigin" column="artwork_origin" jdbcType="VARCHAR"/>
         <result property="artworkImgAddress" column="artwork_img_address" jdbcType="VARCHAR"/>
         <result property="artworkLevel" column="artwork_level" jdbcType="INTEGER"/>
+        <result property="artworkReleaseDate" column="artwork_release_date" jdbcType="TIMESTAMP"/>
     </resultMap>
 
     <!--查询单个-->
     <select id="queryById" resultMap="ArtworkListMap">
         select
-          artwork_id, artwork_name, artwork_release_date, total_count, first_release_username, artwork_origin, artwork_img_address, artwork_level
+          artwork_id, artwork_name, total_count, first_release_username, artwork_origin, artwork_img_address, artwork_level, artwork_release_date
         from artwork_list
         where artwork_id = #{artworkId}
     </select>
@@ -24,7 +24,7 @@
     <!--查询指定行数据-->
     <select id="queryAllByLimit" resultMap="ArtworkListMap">
         select
-          artwork_id, artwork_name, artwork_release_date, total_count, first_release_username, artwork_origin, artwork_img_address, artwork_level
+          artwork_id, artwork_name, total_count, first_release_username, artwork_origin, artwork_img_address, artwork_level, artwork_release_date
         from artwork_list
         <where>
             <if test="artworkId != null and artworkId != ''">
@@ -32,9 +32,6 @@
             </if>
             <if test="artworkName != null and artworkName != ''">
                 and artwork_name = #{artworkName}
-            </if>
-            <if test="artworkReleaseDate != null">
-                and artwork_release_date = #{artworkReleaseDate}
             </if>
             <if test="totalCount != null">
                 and total_count = #{totalCount}
@@ -50,6 +47,9 @@
             </if>
             <if test="artworkLevel != null">
                 and artwork_level = #{artworkLevel}
+            </if>
+            <if test="artworkReleaseDate != null">
+                and artwork_release_date = #{artworkReleaseDate}
             </if>
         </where>
         limit #{pageable.offset}, #{pageable.pageSize}
@@ -66,9 +66,6 @@
             <if test="artworkName != null and artworkName != ''">
                 and artwork_name = #{artworkName}
             </if>
-            <if test="artworkReleaseDate != null">
-                and artwork_release_date = #{artworkReleaseDate}
-            </if>
             <if test="totalCount != null">
                 and total_count = #{totalCount}
             </if>
@@ -84,37 +81,40 @@
             <if test="artworkLevel != null">
                 and artwork_level = #{artworkLevel}
             </if>
+            <if test="artworkReleaseDate != null">
+                and artwork_release_date = #{artworkReleaseDate}
+            </if>
         </where>
     </select>
 
     <!--新增所有列-->
     <insert id="insert" keyProperty="artworkId" useGeneratedKeys="true">
-        insert into artwork_list(artwork_name, artwork_release_date, total_count, first_release_username, artwork_origin, artwork_img_address, artwork_level)
-        values (#{artworkName}, #{artworkReleaseDate}, #{totalCount}, #{firstReleaseUsername}, #{artworkOrigin}, #{artworkImgAddress}, #{artworkLevel})
+        insert into artwork_list(artwork_name, total_count, first_release_username, artwork_origin, artwork_img_address, artwork_level, artwork_release_date)
+        values (#{artworkName}, #{totalCount}, #{firstReleaseUsername}, #{artworkOrigin}, #{artworkImgAddress}, #{artworkLevel}, #{artworkReleaseDate})
     </insert>
 
     <insert id="insertBatch" keyProperty="artworkId" useGeneratedKeys="true">
-        insert into artwork_list(artwork_name, artwork_release_date, total_count, first_release_username, artwork_origin, artwork_img_address, artwork_level)
+        insert into artwork_list(artwork_name, total_count, first_release_username, artwork_origin, artwork_img_address, artwork_level, artwork_release_date)
         values
         <foreach collection="entities" item="entity" separator=",">
-        (#{entity.artworkName}, #{entity.artworkReleaseDate}, #{entity.totalCount}, #{entity.firstReleaseUsername}, #{entity.artworkOrigin}, #{entity.artworkImgAddress}, #{entity.artworkLevel})
+        (#{entity.artworkName}, #{entity.totalCount}, #{entity.firstReleaseUsername}, #{entity.artworkOrigin}, #{entity.artworkImgAddress}, #{entity.artworkLevel}, #{entity.artworkReleaseDate})
         </foreach>
     </insert>
 
     <insert id="insertOrUpdateBatch" keyProperty="artworkId" useGeneratedKeys="true">
-        insert into artwork_list(artwork_name, artwork_release_date, total_count, first_release_username, artwork_origin, artwork_img_address, artwork_level)
+        insert into artwork_list(artwork_name, total_count, first_release_username, artwork_origin, artwork_img_address, artwork_level, artwork_release_date)
         values
         <foreach collection="entities" item="entity" separator=",">
-            (#{entity.artworkName}, #{entity.artworkReleaseDate}, #{entity.totalCount}, #{entity.firstReleaseUsername}, #{entity.artworkOrigin}, #{entity.artworkImgAddress}, #{entity.artworkLevel})
+            (#{entity.artworkName}, #{entity.totalCount}, #{entity.firstReleaseUsername}, #{entity.artworkOrigin}, #{entity.artworkImgAddress}, #{entity.artworkLevel}, #{entity.artworkReleaseDate})
         </foreach>
         on duplicate key update
         artwork_name = values(artwork_name),
-        artwork_release_date = values(artwork_release_date),
         total_count = values(total_count),
         first_release_username = values(first_release_username),
         artwork_origin = values(artwork_origin),
         artwork_img_address = values(artwork_img_address),
-        artwork_level = values(artwork_level)
+        artwork_level = values(artwork_level),
+        artwork_release_date = values(artwork_release_date)
     </insert>
 
     <!--通过主键修改数据-->
@@ -123,9 +123,6 @@
         <set>
             <if test="artworkName != null and artworkName != ''">
                 artwork_name = #{artworkName},
-            </if>
-            <if test="artworkReleaseDate != null">
-                artwork_release_date = #{artworkReleaseDate},
             </if>
             <if test="totalCount != null">
                 total_count = #{totalCount},
@@ -141,6 +138,9 @@
             </if>
             <if test="artworkLevel != null">
                 artwork_level = #{artworkLevel},
+            </if>
+            <if test="artworkReleaseDate != null">
+                artwork_release_date = #{artworkReleaseDate},
             </if>
         </set>
         where artwork_id = #{artworkId}

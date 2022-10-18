@@ -14,7 +14,7 @@ import javax.annotation.Resource;
  * (ExceptionLog)表服务实现类
  *
  * @author makejava
- * @since 2022-10-17 18:34:06
+ * @since 2022-10-18 17:46:02
  */
 @Service("exceptionLogService")
 public class ExceptionLogServiceImpl implements ExceptionLogService {

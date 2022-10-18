@@ -3,11 +3,11 @@
 <mapper namespace="com.kedom.dao.ArtworkReleaseDao">
 
     <resultMap type="com.kedom.entity.ArtworkRelease" id="ArtworkReleaseMap">
-        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="artworkReleaseId" column="artwork_release_id" jdbcType="VARCHAR"/>
         <result property="artworkId" column="artwork_id" jdbcType="VARCHAR"/>
         <result property="artworkCount" column="artwork_count" jdbcType="INTEGER"/>
         <result property="artworkCollectCode" column="artwork_collect_code" jdbcType="VARCHAR"/>
-        <result property="artworkReleaseUsername" column="artwork_release_username" jdbcType="VARCHAR"/>
+        <result property="artworkReleaseUserId" column="artwork_release_user_id" jdbcType="VARCHAR"/>
         <result property="surplusCount" column="surplus_count" jdbcType="INTEGER"/>
         <result property="artworkReleaseData" column="artwork_release_data" jdbcType="TIMESTAMP"/>
         <result property="artworkEndReleaseData" column="artwork_end_release_data" jdbcType="TIMESTAMP"/>
@@ -17,19 +17,19 @@
     <!--查询单个-->
     <select id="queryById" resultMap="ArtworkReleaseMap">
         select
-          id, artwork_id, artwork_count, artwork_collect_code, artwork_release_username, surplus_count, artwork_release_data, artwork_end_release_data, release_state
+          artwork_release_id, artwork_id, artwork_count, artwork_collect_code, artwork_release_user_id, surplus_count, artwork_release_data, artwork_end_release_data, release_state
         from artwork_release
-        where id = #{id}
+        where artwork_release_id = #{artworkReleaseId}
     </select>
 
     <!--查询指定行数据-->
     <select id="queryAllByLimit" resultMap="ArtworkReleaseMap">
         select
-          id, artwork_id, artwork_count, artwork_collect_code, artwork_release_username, surplus_count, artwork_release_data, artwork_end_release_data, release_state
+          artwork_release_id, artwork_id, artwork_count, artwork_collect_code, artwork_release_user_id, surplus_count, artwork_release_data, artwork_end_release_data, release_state
         from artwork_release
         <where>
-            <if test="id != null">
-                and id = #{id}
+            <if test="artworkReleaseId != null and artworkReleaseId != ''">
+                and artwork_release_id = #{artworkReleaseId}
             </if>
             <if test="artworkId != null and artworkId != ''">
                 and artwork_id = #{artworkId}
@@ -40,8 +40,8 @@
             <if test="artworkCollectCode != null and artworkCollectCode != ''">
                 and artwork_collect_code = #{artworkCollectCode}
             </if>
-            <if test="artworkReleaseUsername != null and artworkReleaseUsername != ''">
-                and artwork_release_username = #{artworkReleaseUsername}
+            <if test="artworkReleaseUserId != null and artworkReleaseUserId != ''">
+                and artwork_release_user_id = #{artworkReleaseUserId}
             </if>
             <if test="surplusCount != null">
                 and surplus_count = #{surplusCount}
@@ -64,8 +64,8 @@
         select count(1)
         from artwork_release
         <where>
-            <if test="id != null">
-                and id = #{id}
+            <if test="artworkReleaseId != null and artworkReleaseId != ''">
+                and artwork_release_id = #{artworkReleaseId}
             </if>
             <if test="artworkId != null and artworkId != ''">
                 and artwork_id = #{artworkId}
@@ -76,8 +76,8 @@
             <if test="artworkCollectCode != null and artworkCollectCode != ''">
                 and artwork_collect_code = #{artworkCollectCode}
             </if>
-            <if test="artworkReleaseUsername != null and artworkReleaseUsername != ''">
-                and artwork_release_username = #{artworkReleaseUsername}
+            <if test="artworkReleaseUserId != null and artworkReleaseUserId != ''">
+                and artwork_release_user_id = #{artworkReleaseUserId}
             </if>
             <if test="surplusCount != null">
                 and surplus_count = #{surplusCount}
@@ -95,30 +95,30 @@
     </select>
 
     <!--新增所有列-->
-    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
-        insert into artwork_release(artwork_id, artwork_count, artwork_collect_code, artwork_release_username, surplus_count, artwork_release_data, artwork_end_release_data, release_state)
-        values (#{artworkId}, #{artworkCount}, #{artworkCollectCode}, #{artworkReleaseUsername}, #{surplusCount}, #{artworkReleaseData}, #{artworkEndReleaseData}, #{releaseState})
+    <insert id="insert" keyProperty="artworkReleaseId" useGeneratedKeys="true">
+        insert into artwork_release(artwork_id, artwork_count, artwork_collect_code, artwork_release_user_id, surplus_count, artwork_release_data, artwork_end_release_data, release_state)
+        values (#{artworkId}, #{artworkCount}, #{artworkCollectCode}, #{artworkReleaseUserId}, #{surplusCount}, #{artworkReleaseData}, #{artworkEndReleaseData}, #{releaseState})
     </insert>
 
-    <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true">
-        insert into artwork_release(artwork_id, artwork_count, artwork_collect_code, artwork_release_username, surplus_count, artwork_release_data, artwork_end_release_data, release_state)
+    <insert id="insertBatch" keyProperty="artworkReleaseId" useGeneratedKeys="true">
+        insert into artwork_release(artwork_id, artwork_count, artwork_collect_code, artwork_release_user_id, surplus_count, artwork_release_data, artwork_end_release_data, release_state)
         values
         <foreach collection="entities" item="entity" separator=",">
-        (#{entity.artworkId}, #{entity.artworkCount}, #{entity.artworkCollectCode}, #{entity.artworkReleaseUsername}, #{entity.surplusCount}, #{entity.artworkReleaseData}, #{entity.artworkEndReleaseData}, #{entity.releaseState})
+        (#{entity.artworkId}, #{entity.artworkCount}, #{entity.artworkCollectCode}, #{entity.artworkReleaseUserId}, #{entity.surplusCount}, #{entity.artworkReleaseData}, #{entity.artworkEndReleaseData}, #{entity.releaseState})
         </foreach>
     </insert>
 
-    <insert id="insertOrUpdateBatch" keyProperty="id" useGeneratedKeys="true">
-        insert into artwork_release(artwork_id, artwork_count, artwork_collect_code, artwork_release_username, surplus_count, artwork_release_data, artwork_end_release_data, release_state)
+    <insert id="insertOrUpdateBatch" keyProperty="artworkReleaseId" useGeneratedKeys="true">
+        insert into artwork_release(artwork_id, artwork_count, artwork_collect_code, artwork_release_user_id, surplus_count, artwork_release_data, artwork_end_release_data, release_state)
         values
         <foreach collection="entities" item="entity" separator=",">
-            (#{entity.artworkId}, #{entity.artworkCount}, #{entity.artworkCollectCode}, #{entity.artworkReleaseUsername}, #{entity.surplusCount}, #{entity.artworkReleaseData}, #{entity.artworkEndReleaseData}, #{entity.releaseState})
+            (#{entity.artworkId}, #{entity.artworkCount}, #{entity.artworkCollectCode}, #{entity.artworkReleaseUserId}, #{entity.surplusCount}, #{entity.artworkReleaseData}, #{entity.artworkEndReleaseData}, #{entity.releaseState})
         </foreach>
         on duplicate key update
         artwork_id = values(artwork_id),
         artwork_count = values(artwork_count),
         artwork_collect_code = values(artwork_collect_code),
-        artwork_release_username = values(artwork_release_username),
+        artwork_release_user_id = values(artwork_release_user_id),
         surplus_count = values(surplus_count),
         artwork_release_data = values(artwork_release_data),
         artwork_end_release_data = values(artwork_end_release_data),
@@ -138,8 +138,8 @@
             <if test="artworkCollectCode != null and artworkCollectCode != ''">
                 artwork_collect_code = #{artworkCollectCode},
             </if>
-            <if test="artworkReleaseUsername != null and artworkReleaseUsername != ''">
-                artwork_release_username = #{artworkReleaseUsername},
+            <if test="artworkReleaseUserId != null and artworkReleaseUserId != ''">
+                artwork_release_user_id = #{artworkReleaseUserId},
             </if>
             <if test="surplusCount != null">
                 surplus_count = #{surplusCount},
@@ -154,12 +154,12 @@
                 release_state = #{releaseState},
             </if>
         </set>
-        where id = #{id}
+        where artwork_release_id = #{artworkReleaseId}
     </update>
 
     <!--通过主键删除-->
     <delete id="deleteById">
-        delete from artwork_release where id = #{id}
+        delete from artwork_release where artwork_release_id = #{artworkReleaseId}
     </delete>
 
 </mapper>

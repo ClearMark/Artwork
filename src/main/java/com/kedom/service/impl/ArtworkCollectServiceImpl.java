@@ -14,7 +14,7 @@ import javax.annotation.Resource;
  * 艺术品收集表(ArtworkCollect)表服务实现类
  *
  * @author makejava
- * @since 2022-10-17 18:33:26
+ * @since 2022-10-18 17:45:56
  */
 @Service("artworkCollectService")
 public class ArtworkCollectServiceImpl implements ArtworkCollectService {
@@ -24,12 +24,12 @@ public class ArtworkCollectServiceImpl implements ArtworkCollectService {
     /**
      * 通过ID查询单条数据
      *
-     * @param id 主键
+     * @param artworkCollectId 主键
      * @return 实例对象
      */
     @Override
-    public ArtworkCollect queryById(Integer id) {
-        return this.artworkCollectDao.queryById(id);
+    public ArtworkCollect queryById(String artworkCollectId) {
+        return this.artworkCollectDao.queryById(artworkCollectId);
     }
 
     /**
@@ -66,17 +66,17 @@ public class ArtworkCollectServiceImpl implements ArtworkCollectService {
     @Override
     public ArtworkCollect update(ArtworkCollect artworkCollect) {
         this.artworkCollectDao.update(artworkCollect);
-        return this.queryById(artworkCollect.getId());
+        return this.queryById(artworkCollect.getArtworkCollectId());
     }
 
     /**
      * 通过主键删除数据
      *
-     * @param id 主键
+     * @param artworkCollectId 主键
      * @return 是否成功
      */
     @Override
-    public boolean deleteById(Integer id) {
-        return this.artworkCollectDao.deleteById(id) > 0;
+    public boolean deleteById(String artworkCollectId) {
+        return this.artworkCollectDao.deleteById(artworkCollectId) > 0;
     }
 }

@@ -13,7 +13,7 @@ import javax.annotation.Resource;
  * 艺术品审批表(ArtworkExamine)表控制层
  *
  * @author makejava
- * @since 2022-10-17 18:33:26
+ * @since 2022-10-18 17:45:57
  */
 @RestController
 @RequestMapping("artworkExamine")

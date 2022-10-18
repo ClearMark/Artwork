@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kedom.dao.ArtworkStopReleaseDao">
+
+    <resultMap type="com.kedom.entity.ArtworkStopRelease" id="ArtworkStopReleaseMap">
+        <result property="artworkStopReleaseId" column="artwork_stop_release_id" jdbcType="VARCHAR"/>
+        <result property="artworkId" column="artwork_id" jdbcType="VARCHAR"/>
+        <result property="artworkCount" column="artwork_count" jdbcType="INTEGER"/>
+        <result property="artworkData" column="artwork_data" jdbcType="INTEGER"/>
+        <result property="artworkReleaseId" column="artwork_release_id" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="ArtworkStopReleaseMap">
+        select
+          artwork_stop_release_id, artwork_id, artwork_count, artwork_data, artwork_release_id
+        from artwork_stop_release
+        where artwork_stop_release_id = #{artworkStopReleaseId}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="ArtworkStopReleaseMap">
+        select
+          artwork_stop_release_id, artwork_id, artwork_count, artwork_data, artwork_release_id
+        from artwork_stop_release
+        <where>
+            <if test="artworkStopReleaseId != null and artworkStopReleaseId != ''">
+                and artwork_stop_release_id = #{artworkStopReleaseId}
+            </if>
+            <if test="artworkId != null and artworkId != ''">
+                and artwork_id = #{artworkId}
+            </if>
+            <if test="artworkCount != null">
+                and artwork_count = #{artworkCount}
+            </if>
+            <if test="artworkData != null">
+                and artwork_data = #{artworkData}
+            </if>
+            <if test="artworkReleaseId != null and artworkReleaseId != ''">
+                and artwork_release_id = #{artworkReleaseId}
+            </if>
+        </where>
+        limit #{pageable.offset}, #{pageable.pageSize}
+    </select>
+
+    <!--统计总行数-->
+    <select id="count" resultType="java.lang.Long">
+        select count(1)
+        from artwork_stop_release
+        <where>
+            <if test="artworkStopReleaseId != null and artworkStopReleaseId != ''">
+                and artwork_stop_release_id = #{artworkStopReleaseId}
+            </if>
+            <if test="artworkId != null and artworkId != ''">
+                and artwork_id = #{artworkId}
+            </if>
+            <if test="artworkCount != null">
+                and artwork_count = #{artworkCount}
+            </if>
+            <if test="artworkData != null">
+                and artwork_data = #{artworkData}
+            </if>
+            <if test="artworkReleaseId != null and artworkReleaseId != ''">
+                and artwork_release_id = #{artworkReleaseId}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="artworkStopReleaseId" useGeneratedKeys="true">
+        insert into artwork_stop_release(artwork_id, artwork_count, artwork_data, artwork_release_id)
+        values (#{artworkId}, #{artworkCount}, #{artworkData}, #{artworkReleaseId})
+    </insert>
+
+    <insert id="insertBatch" keyProperty="artworkStopReleaseId" useGeneratedKeys="true">
+        insert into artwork_stop_release(artwork_id, artwork_count, artwork_data, artwork_release_id)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+        (#{entity.artworkId}, #{entity.artworkCount}, #{entity.artworkData}, #{entity.artworkReleaseId})
+        </foreach>
+    </insert>
+
+    <insert id="insertOrUpdateBatch" keyProperty="artworkStopReleaseId" useGeneratedKeys="true">
+        insert into artwork_stop_release(artwork_id, artwork_count, artwork_data, artwork_release_id)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.artworkId}, #{entity.artworkCount}, #{entity.artworkData}, #{entity.artworkReleaseId})
+        </foreach>
+        on duplicate key update
+        artwork_id = values(artwork_id),
+        artwork_count = values(artwork_count),
+        artwork_data = values(artwork_data),
+        artwork_release_id = values(artwork_release_id)
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update artwork_stop_release
+        <set>
+            <if test="artworkId != null and artworkId != ''">
+                artwork_id = #{artworkId},
+            </if>
+            <if test="artworkCount != null">
+                artwork_count = #{artworkCount},
+            </if>
+            <if test="artworkData != null">
+                artwork_data = #{artworkData},
+            </if>
+            <if test="artworkReleaseId != null and artworkReleaseId != ''">
+                artwork_release_id = #{artworkReleaseId},
+            </if>
+        </set>
+        where artwork_stop_release_id = #{artworkStopReleaseId}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from artwork_stop_release where artwork_stop_release_id = #{artworkStopReleaseId}
+    </delete>
+
+</mapper>
+

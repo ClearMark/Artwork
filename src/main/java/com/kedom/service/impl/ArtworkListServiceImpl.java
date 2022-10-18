@@ -14,7 +14,7 @@ import javax.annotation.Resource;
  * 艺术品目录(ArtworkList)表服务实现类
  *
  * @author makejava
- * @since 2022-10-17 18:33:29
+ * @since 2022-10-18 17:46:00
  */
 @Service("artworkListService")
 public class ArtworkListServiceImpl implements ArtworkListService {

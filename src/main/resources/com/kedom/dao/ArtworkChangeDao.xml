@@ -3,9 +3,9 @@
 <mapper namespace="com.kedom.dao.ArtworkChangeDao">
 
     <resultMap type="com.kedom.entity.ArtworkChange" id="ArtworkChangeMap">
-        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="artworkChangeId" column="artwork_change_id" jdbcType="VARCHAR"/>
         <result property="artworkId" column="artwork_id" jdbcType="VARCHAR"/>
-        <result property="username" column="username" jdbcType="VARCHAR"/>
+        <result property="userId" column="user_id" jdbcType="VARCHAR"/>
         <result property="artworkCountChange" column="artwork_count_change" jdbcType="INTEGER"/>
         <result property="changeDate" column="change_date" jdbcType="TIMESTAMP"/>
         <result property="changeMode" column="change_mode" jdbcType="INTEGER"/>
@@ -14,25 +14,25 @@
     <!--查询单个-->
     <select id="queryById" resultMap="ArtworkChangeMap">
         select
-          id, artwork_id, username, artwork_count_change, change_date, change_mode
+          artwork_change_id, artwork_id, user_id, artwork_count_change, change_date, change_mode
         from artwork_change
-        where id = #{id}
+        where artwork_change_id = #{artworkChangeId}
     </select>
 
     <!--查询指定行数据-->
     <select id="queryAllByLimit" resultMap="ArtworkChangeMap">
         select
-          id, artwork_id, username, artwork_count_change, change_date, change_mode
+          artwork_change_id, artwork_id, user_id, artwork_count_change, change_date, change_mode
         from artwork_change
         <where>
-            <if test="id != null">
-                and id = #{id}
+            <if test="artworkChangeId != null and artworkChangeId != ''">
+                and artwork_change_id = #{artworkChangeId}
             </if>
             <if test="artworkId != null and artworkId != ''">
                 and artwork_id = #{artworkId}
             </if>
-            <if test="username != null and username != ''">
-                and username = #{username}
+            <if test="userId != null and userId != ''">
+                and user_id = #{userId}
             </if>
             <if test="artworkCountChange != null">
                 and artwork_count_change = #{artworkCountChange}
@@ -52,14 +52,14 @@
         select count(1)
         from artwork_change
         <where>
-            <if test="id != null">
-                and id = #{id}
+            <if test="artworkChangeId != null and artworkChangeId != ''">
+                and artwork_change_id = #{artworkChangeId}
             </if>
             <if test="artworkId != null and artworkId != ''">
                 and artwork_id = #{artworkId}
             </if>
-            <if test="username != null and username != ''">
-                and username = #{username}
+            <if test="userId != null and userId != ''">
+                and user_id = #{userId}
             </if>
             <if test="artworkCountChange != null">
                 and artwork_count_change = #{artworkCountChange}
@@ -74,28 +74,28 @@
     </select>
 
     <!--新增所有列-->
-    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
-        insert into artwork_change(artwork_id, username, artwork_count_change, change_date, change_mode)
-        values (#{artworkId}, #{username}, #{artworkCountChange}, #{changeDate}, #{changeMode})
+    <insert id="insert" keyProperty="artworkChangeId" useGeneratedKeys="true">
+        insert into artwork_change(artwork_id, user_id, artwork_count_change, change_date, change_mode)
+        values (#{artworkId}, #{userId}, #{artworkCountChange}, #{changeDate}, #{changeMode})
     </insert>
 
-    <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true">
-        insert into artwork_change(artwork_id, username, artwork_count_change, change_date, change_mode)
+    <insert id="insertBatch" keyProperty="artworkChangeId" useGeneratedKeys="true">
+        insert into artwork_change(artwork_id, user_id, artwork_count_change, change_date, change_mode)
         values
         <foreach collection="entities" item="entity" separator=",">
-        (#{entity.artworkId}, #{entity.username}, #{entity.artworkCountChange}, #{entity.changeDate}, #{entity.changeMode})
+        (#{entity.artworkId}, #{entity.userId}, #{entity.artworkCountChange}, #{entity.changeDate}, #{entity.changeMode})
         </foreach>
     </insert>
 
-    <insert id="insertOrUpdateBatch" keyProperty="id" useGeneratedKeys="true">
-        insert into artwork_change(artwork_id, username, artwork_count_change, change_date, change_mode)
+    <insert id="insertOrUpdateBatch" keyProperty="artworkChangeId" useGeneratedKeys="true">
+        insert into artwork_change(artwork_id, user_id, artwork_count_change, change_date, change_mode)
         values
         <foreach collection="entities" item="entity" separator=",">
-            (#{entity.artworkId}, #{entity.username}, #{entity.artworkCountChange}, #{entity.changeDate}, #{entity.changeMode})
+            (#{entity.artworkId}, #{entity.userId}, #{entity.artworkCountChange}, #{entity.changeDate}, #{entity.changeMode})
         </foreach>
         on duplicate key update
         artwork_id = values(artwork_id),
-        username = values(username),
+        user_id = values(user_id),
         artwork_count_change = values(artwork_count_change),
         change_date = values(change_date),
         change_mode = values(change_mode)
@@ -108,8 +108,8 @@
             <if test="artworkId != null and artworkId != ''">
                 artwork_id = #{artworkId},
             </if>
-            <if test="username != null and username != ''">
-                username = #{username},
+            <if test="userId != null and userId != ''">
+                user_id = #{userId},
             </if>
             <if test="artworkCountChange != null">
                 artwork_count_change = #{artworkCountChange},
@@ -121,12 +121,12 @@
                 change_mode = #{changeMode},
             </if>
         </set>
-        where id = #{id}
+        where artwork_change_id = #{artworkChangeId}
     </update>
 
     <!--通过主键删除-->
     <delete id="deleteById">
-        delete from artwork_change where id = #{id}
+        delete from artwork_change where artwork_change_id = #{artworkChangeId}
     </delete>
 
 </mapper>
